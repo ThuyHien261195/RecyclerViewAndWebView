@@ -7,6 +7,7 @@
     app:contentPadding="@dimen/post_card_view_spacing">
 
     <LinearLayout
+        android:id="@+id/linear_layout_reddit_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_light_background"

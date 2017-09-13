@@ -21,7 +21,7 @@ public class PostViewActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        String url = getIntent().getStringExtra(ConstantCollection.BUNDLE_URL);
+        String url = getIntent().getStringExtra(ConstantCollection.EXTRA_NAME_URL);
         webViewRedditPost.loadUrl(url);
     }
 }
