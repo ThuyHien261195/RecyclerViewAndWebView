@@ -2,4 +2,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="post_card_view_spacing">10dp</dimen>
+    <dimen name="score_text_size">20sp</dimen>
+    <dimen name="title_text_size">18sp</dimen>
+    <dimen name="text_view_horizontal_spacing">5dp</dimen>
+    <dimen name="text_view_vertical_spacing">5dp</dimen>
+    <dimen name="post_card_view_height">100dp</dimen>
 </resources>
