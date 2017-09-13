@@ -1,5 +1,7 @@
 package com.hasbrain.areyouandroiddev.model;
 
+import com.hasbrain.areyouandroiddev.ConstantCollection;
+
 /**
  * Created by Jupiter (vu.cao.duy@gmail.com) on 10/8/15.
  */
@@ -14,6 +16,15 @@ public class RedditPost {
     private String subreddit;
     private String domain;
     private long createdUTC;
+    private int viewType;
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
 
     public String getId() {
         return id;
@@ -93,5 +104,9 @@ public class RedditPost {
 
     public void setDomain(String domain) {
         this.domain = domain;
+    }
+
+    public RedditPost(){
+        this.viewType = ConstantCollection.CONTENT_VIEW;
     }
 }
