@@ -118,7 +118,9 @@ public class RedditPostAdapter extends RecyclerView.Adapter<PostViewHolder> {
     }
 
     private String getColoredSpanned(String text, int color) {
-        return "<font color=" + context.getResources().getString(color) + ">" + text + "</font>";
+        color = ContextCompat.getColor(context, color);
+        String hexColor = String.format("#%06X", (0xFFFFFF & color));
+        return "<font color='" + hexColor + "'>" + text + "</font>";
     }
 
     private String formatAuthorTitle(String author, String subReddit) {
