@@ -1,9 +1,12 @@
-package com.hasbrain.areyouandroiddev;
+package com.hasbrain.areyouandroiddev.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.hasbrain.areyouandroiddev.ConstantCollection;
+import com.hasbrain.areyouandroiddev.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
