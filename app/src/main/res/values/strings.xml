@@ -4,4 +4,6 @@
     <string name="title_comment">%1$d Comments . %2$s</string>
     <string name="title_see_more">See more interesting posts about Android development
         at https://www.reddit.com/r/androiddev/</string>
+    <string name="action_recycler_view">Recycler View</string>
+    <string name="action_list_view">List View</string>
 </resources>

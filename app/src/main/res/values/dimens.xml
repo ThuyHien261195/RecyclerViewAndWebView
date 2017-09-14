@@ -7,6 +7,12 @@
     <dimen name="title_text_size">18sp</dimen>
     <dimen name="text_view_horizontal_spacing">5dp</dimen>
     <dimen name="text_view_vertical_spacing">5dp</dimen>
-    <dimen name="post_card_view_height">100dp</dimen>
-    <dimen name="card_view_margin">5dp</dimen>
+    <dimen name="item_post_height">100dp</dimen>
+    <dimen name="item_post_margin">5dp</dimen>
+    <dimen name="btn_common_vertical_margin">20dp</dimen>
+    <dimen name="btn_common_width">140dp</dimen>
+    <dimen name="item_post_radius">4dp</dimen>
+    <dimen name="lv_divider_height">10dp</dimen>
+    <dimen name="item_post_border">0.5dp</dimen>
+    <dimen name="item_footer_vertical_padding">15dp</dimen>
 </resources>
