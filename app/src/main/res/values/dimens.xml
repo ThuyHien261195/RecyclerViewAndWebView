@@ -8,4 +8,5 @@
     <dimen name="text_view_horizontal_spacing">5dp</dimen>
     <dimen name="text_view_vertical_spacing">5dp</dimen>
     <dimen name="post_card_view_height">100dp</dimen>
+    <dimen name="card_view_margin">5dp</dimen>
 </resources>
