@@ -112,11 +112,6 @@ public class PostListActivity extends AppCompatActivity {
     }
 
     private void bindDataToRecyclerView(List<RedditPost> postList) {
-        // Add item null is a footer item
-        RedditPost footerPostItem = new RedditPost();
-        footerPostItem.setViewType(ConstantCollection.FOOTER_VIEW);
-        postList.add(footerPostItem);
-
         if (recyclerViewRedditPost != null) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             recyclerViewRedditPost.setLayoutManager(linearLayoutManager);

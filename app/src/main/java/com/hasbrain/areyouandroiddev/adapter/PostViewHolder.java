@@ -32,16 +32,8 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.text_comment)
     TextView textViewComment;
 
-    PostViewHolder(View view, int viewType) {
+    PostViewHolder(View view) {
         super(view);
-        switch (viewType) {
-            case ConstantCollection.CONTENT_VIEW:
-                ButterKnife.bind(this, view);
-                break;
-            case ConstantCollection.FOOTER_VIEW:
-                break;
-            default:
-                break;
-        }
+        ButterKnife.bind(this, view);
     }
 }

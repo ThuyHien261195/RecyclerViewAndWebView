@@ -20,7 +20,7 @@ import java.util.List;
  * Created by thuyhien on 9/13/17.
  */
 
-public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<PostViewHolder> {
+public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<RedditPost> redditPostList;
 
@@ -30,29 +30,30 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<PostView
     }
 
     @Override
-    public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = null;
         switch (viewType) {
             case ConstantCollection.CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_card_view_post, parent, false);
-                break;
+                return new PostViewHolder(rowView);
             case ConstantCollection.FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_footer, parent, false);
                 setOnClickFooterView(rowView);
+                return new FooterViewHolder(rowView);
             default:
                 break;
         }
-        return new PostViewHolder(rowView, viewType);
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(PostViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
         switch (viewType) {
             case ConstantCollection.CONTENT_VIEW:
-                bindContentView(holder, position);
+                bindContentView((PostViewHolder) holder, position);
                 break;
             case ConstantCollection.FOOTER_VIEW:
                 break;
@@ -63,12 +64,17 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<PostView
 
     @Override
     public int getItemCount() {
-        return redditPostList.size();
+        // RedditPostList + 1 for Footer View
+        return redditPostList.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return redditPostList.get(position).getViewType();
+        if (position == redditPostList.size()) {
+            return ConstantCollection.FOOTER_VIEW;
+        } else {
+            return ConstantCollection.CONTENT_VIEW;
+        }
     }
 
     private void setOnClickFooterView(View view) {
