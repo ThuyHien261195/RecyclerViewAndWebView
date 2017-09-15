@@ -9,4 +9,12 @@
         <item name="android:colorBackground">@android:color/background_light</item>
     </style>
 
+    <style name="CommonButtonTheme">
+        <item name="android:layout_width">@dimen/btn_common_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginTop">@dimen/btn_common_vertical_margin</item>
+    </style>
 </resources>

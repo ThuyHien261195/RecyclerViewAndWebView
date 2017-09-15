@@ -6,6 +6,7 @@
         at https://www.reddit.com/r/androiddev/</string>
     <string name="action_recycler_view">Recycler View</string>
     <string name="action_list_view">List View</string>
+    <string name="action_grid_view">Grid View</string>
     <string name="title_created_hours">%1$d hours ago</string>
     <string name="title_created_days">%1$d days ago</string>
     <string name="title_created_months">%1$d months ago</string>
