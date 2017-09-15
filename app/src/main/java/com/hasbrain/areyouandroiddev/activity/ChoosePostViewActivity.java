@@ -23,15 +23,24 @@ public class ChoosePostViewActivity extends AppCompatActivity {
     @OnClick(R.id.button_recycler_view)
     public void onClickBtnViewByRecyclerView() {
         Intent intent = new Intent(this, PostListActivity.class);
-        intent.putExtra(ConstantCollection.EXTRA_NAME_LIST_VIEW_TYPE,
-                ConstantCollection.RECYCLER_VIEW);
+        intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
+                ConstantCollection.PORTRAIT_RECYCLER_VIEW);
         startActivity(intent);
     }
 
     @OnClick(R.id.button_list_view)
     public void onClickBtnViewByListView() {
         Intent intent = new Intent(this, PostListActivity.class);
-        intent.putExtra(ConstantCollection.EXTRA_NAME_LIST_VIEW_TYPE, ConstantCollection.LIST_VIEW);
+        intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
+                ConstantCollection.LIST_VIEW);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.button_grid_view)
+    public void onClickBtnViewByGridView() {
+        Intent intent = new Intent(this, PostListActivity.class);
+        intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
+                ConstantCollection.GRID_VIEW);
         startActivity(intent);
     }
 }

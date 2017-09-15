@@ -10,20 +10,16 @@
 
     <Button
         android:id="@+id/button_recycler_view"
-        android:layout_width="@dimen/btn_common_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent"
-        android:text="@string/action_recycler_view"
-        android:textColor="@android:color/white" />
+        style="@style/CommonButtonTheme"
+        android:text="@string/action_recycler_view" />
 
     <Button
         android:id="@+id/button_list_view"
-        android:layout_width="@dimen/btn_common_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/btn_common_vertical_margin"
-        android:background="@color/colorAccent"
-        android:text="@string/action_list_view"
-        android:textColor="@android:color/white" />
+        style="@style/CommonButtonTheme"
+        android:text="@string/action_list_view" />
+
+    <Button
+        android:id="@+id/button_grid_view"
+        style="@style/CommonButtonTheme"
+        android:text="@string/action_grid_view" />
 </LinearLayout>
