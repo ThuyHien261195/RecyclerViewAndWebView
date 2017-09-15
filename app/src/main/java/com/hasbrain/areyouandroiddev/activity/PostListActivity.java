@@ -5,7 +5,8 @@ import com.google.gson.GsonBuilder;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.R;
-import com.hasbrain.areyouandroiddev.adapter.GroupViewRedditPostAdapter;
+import com.hasbrain.areyouandroiddev.adapter.GridViewRedditPostAdapter;
+import com.hasbrain.areyouandroiddev.adapter.ListViewRedditPostAdapter;
 import com.hasbrain.areyouandroiddev.adapter.RecyclerViewRedditPostAdapter;
 import com.hasbrain.areyouandroiddev.datastore.FeedDataStore;
 import com.hasbrain.areyouandroiddev.datastore.FileBasedFeedDataStore;
@@ -14,7 +15,6 @@ import com.hasbrain.areyouandroiddev.model.RedditPostConverter;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -126,7 +126,7 @@ public class PostListActivity extends AppCompatActivity {
     }
 
     private void setScreenOrientation() {
-        switch (viewType){
+        switch (viewType) {
             case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
             case ConstantCollection.LIST_VIEW:
                 this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -176,8 +176,8 @@ public class PostListActivity extends AppCompatActivity {
 
     private void bindDataToListView(List<RedditPost> postList) {
         if (listViewRedditPost != null) {
-            GroupViewRedditPostAdapter listViewRedditPostAdapter =
-                    new GroupViewRedditPostAdapter(this, postList, ConstantCollection.LIST_VIEW);
+            ListViewRedditPostAdapter listViewRedditPostAdapter =
+                    new ListViewRedditPostAdapter(this, postList);
             View footerView = getLayoutInflater().inflate(R.layout.item_portrait_footer, null);
             listViewRedditPost.addFooterView(footerView);
             listViewRedditPost.setAdapter(listViewRedditPostAdapter);
@@ -187,9 +187,8 @@ public class PostListActivity extends AppCompatActivity {
 
     private void bindDataToGridView(List<RedditPost> postList) {
         if (gridViewRedditPost != null) {
-            postList.add(new RedditPost());
-            GroupViewRedditPostAdapter gridViewRedditPostAdapter =
-                    new GroupViewRedditPostAdapter(this, postList, ConstantCollection.GRID_VIEW);
+            GridViewRedditPostAdapter gridViewRedditPostAdapter =
+                    new GridViewRedditPostAdapter(this, postList);
             gridViewRedditPost.setAdapter(gridViewRedditPostAdapter);
         }
     }

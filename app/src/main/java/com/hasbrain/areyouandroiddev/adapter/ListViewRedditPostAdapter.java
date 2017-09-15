@@ -27,22 +27,18 @@ import java.util.List;
  * Created by thuyhien on 9/14/17.
  */
 
-public class GroupViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
+public class ListViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
 
     private List<Integer> colorTitleList = new ArrayList<Integer>();
     private List<String> titleList = new ArrayList<String>();
     private List<RedditPost> redditPostList;
     private Activity context;
 
-    private int groupViewType;
-
-    public GroupViewRedditPostAdapter(Activity context,
-                                      List<RedditPost> redditPostList,
-                                      int groupViewType) {
+    public ListViewRedditPostAdapter(Activity context,
+                                     List<RedditPost> redditPostList) {
         super(context, R.layout.item_list_view_post, redditPostList);
         this.context = context;
         this.redditPostList = redditPostList;
-        this.groupViewType = groupViewType;
         setColorTitleList();
         setTitleList();
     }
@@ -58,19 +54,8 @@ public class GroupViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
         View rowView = convertView;
         int layoutRes;
         if (rowView == null) {
-            switch (groupViewType) {
-                case ConstantCollection.LIST_VIEW:
-                    layoutRes = R.layout.item_list_view_post;
-                    break;
-                case ConstantCollection.GRID_VIEW:
-                    layoutRes = R.layout.item_grid_view_post;
-                    break;
-                default:
-                    layoutRes = R.layout.item_list_view_post;
-                    break;
-            }
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            rowView = inflater.inflate(layoutRes, parent, false);
+            rowView = inflater.inflate(R.layout.item_list_view_post, parent, false);
             PostViewHolder postViewHolder = new PostViewHolder(rowView);
             rowView.setTag(postViewHolder);
         }
@@ -83,8 +68,12 @@ public class GroupViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
         PostViewHolder holder = (PostViewHolder) view.getTag();
         final RedditPost redditPost = redditPostList.get(position);
         String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), titleList);
-        setTextAuthorTitle(holder.textViewAuthor, redditPost);
+        String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
+                redditPost.getAuthor(),
+                redditPost.getSubreddit(),
+                colorTitleList.get(0));
         holder.textViewScore.setText(String.valueOf(redditPost.getScore()));
+        holder.textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
         holder.textViewPostTitle.setText(redditPost.getTitle());
         if (redditPost.isStickyPost()) {
             holder.textViewPostTitle.setTextColor(colorTitleList.get(1));
@@ -102,23 +91,6 @@ public class GroupViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
                 context.startActivity(postViewIntent);
             }
         });
-    }
-
-    private void setTextAuthorTitle(TextView textViewAuthor, RedditPost redditPost) {
-        switch (groupViewType) {
-            case ConstantCollection.LIST_VIEW:
-                String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
-                        redditPost.getAuthor(),
-                        redditPost.getSubreddit(),
-                        colorTitleList.get(0));
-                textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
-                break;
-            case ConstantCollection.GRID_VIEW:
-                textViewAuthor.setText(redditPost.getAuthor());
-                break;
-            default:
-                break;
-        }
     }
 
     private void setColorTitleList() {
