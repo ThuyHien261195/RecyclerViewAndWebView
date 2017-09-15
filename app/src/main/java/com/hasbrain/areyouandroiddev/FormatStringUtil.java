@@ -39,7 +39,7 @@ public class FormatStringUtil {
 
     public static String getPostTime(long createdUTC, List<String> titleList) {
         long currentTime = System.currentTimeMillis();
-        long betweenTime = currentTime - 1503447436639L; //createdUTC * 1000L;
+        long betweenTime = currentTime - createdUTC * 1000L;
         int postTime = (int) (betweenTime / ConstantCollection.MILLISECS_PER_YEAR);
         if (postTime != 0) {
             return String.format(titleList.get(2), postTime);

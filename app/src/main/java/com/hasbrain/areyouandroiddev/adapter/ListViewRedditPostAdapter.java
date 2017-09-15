@@ -33,7 +33,7 @@ public class ListViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
     private List<RedditPost> redditPostList;
     private Activity context;
 
-    public ListViewRedditPostAdapter(Activity context, List<RedditPost> redditPostList){
+    public ListViewRedditPostAdapter(Activity context, List<RedditPost> redditPostList) {
         super(context, R.layout.item_list_view_post, redditPostList);
         this.context = context;
         this.redditPostList = redditPostList;
@@ -45,7 +45,7 @@ public class ListViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View rowView = convertView;
-        if(rowView == null){
+        if (rowView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             rowView = inflater.inflate(R.layout.item_list_view_post, parent, false);
             PostViewHolder postViewHolder = new PostViewHolder(rowView);
@@ -56,13 +56,14 @@ public class ListViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
         return rowView;
     }
 
-    private void bindContentView(View view, int position){
+    private void bindContentView(View view, int position) {
         PostViewHolder holder = (PostViewHolder) view.getTag();
         final RedditPost redditPost = redditPostList.get(position);
         String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
                 redditPost.getAuthor(),
                 redditPost.getSubreddit(),
                 colorTitleList.get(0));
+        String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), titleList);
         holder.textViewScore.setText(String.valueOf(redditPost.getScore()));
         holder.textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
         holder.textViewPostTitle.setText(redditPost.getTitle());
@@ -70,13 +71,14 @@ public class ListViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
             holder.textViewPostTitle.setTextColor(colorTitleList.get(1));
         }
         holder.textViewComment.setText(String.format(titleList.get(1),
-                        redditPost.getCommentCount(),
-                        redditPost.getDomain(), ""));
+                redditPost.getCommentCount(),
+                redditPost.getDomain(),
+                postTime));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent postViewIntent = new Intent(context.getBaseContext(),PostViewActivity.class);
+                Intent postViewIntent = new Intent(context.getBaseContext(), PostViewActivity.class);
                 postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL, redditPost.getUrl());
                 context.startActivity(postViewIntent);
             }
@@ -103,7 +105,7 @@ public class ListViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
         public TextView textViewPostTitle;
         public TextView textViewComment;
 
-        PostViewHolder (View view){
+        PostViewHolder(View view) {
             textViewScore = (TextView) view.findViewById(R.id.text_score);
             textViewAuthor = (TextView) view.findViewById(R.id.text_author);
             textViewPostTitle = (TextView) view.findViewById(R.id.text_post_title);
