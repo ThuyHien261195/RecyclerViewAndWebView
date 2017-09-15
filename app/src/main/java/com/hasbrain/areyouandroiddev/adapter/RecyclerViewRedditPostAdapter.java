@@ -14,6 +14,7 @@ import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,12 +22,17 @@ import java.util.List;
  */
 
 public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private List<Integer> colorTitleList = new ArrayList<Integer>();
+    private List<String> titleList = new ArrayList<String>();
     private Context context;
     private List<RedditPost> redditPostList;
 
     public RecyclerViewRedditPostAdapter(Context context, List<RedditPost> redditPostList) {
         this.context = context;
         this.redditPostList = redditPostList;
+        setColorTitleList();
+        setTitleList();
     }
 
     @Override
@@ -91,20 +97,21 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
 
     private void bindContentView(PostViewHolder holder, int position) {
         final RedditPost redditPost = redditPostList.get(position);
-        String authorTitle = FormatStringUtil.formatAuthorTitle(context,
+        String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
                 redditPost.getAuthor(),
-                redditPost.getSubreddit());
+                redditPost.getSubreddit(),
+                colorTitleList.get(0));
+        String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), titleList);
         holder.textViewScore.setText(String.valueOf(redditPost.getScore()));
         holder.textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
         holder.textViewPostTitle.setText(redditPost.getTitle());
         if (redditPost.isStickyPost()) {
-            holder.textViewPostTitle.setTextColor(
-                    ContextCompat.getColor(context, R.color.color_sticky_post));
+            holder.textViewPostTitle.setTextColor(colorTitleList.get(1));
         }
-        holder.textViewComment.setText(context.getResources()
-                .getString(R.string.title_comment,
-                        redditPost.getCommentCount(),
-                        redditPost.getDomain()));
+        holder.textViewComment.setText(String.format(titleList.get(1),
+                redditPost.getCommentCount(),
+                redditPost.getDomain(),
+                postTime));
         holder.linearLayoutRedditPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,5 +120,19 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
                 context.startActivity(postViewIntent);
             }
         });
+    }
+
+    private void setColorTitleList() {
+        colorTitleList.add(ContextCompat.getColor(context, R.color.color_author_title));
+        colorTitleList.add(ContextCompat.getColor(context, R.color.color_sticky_post));
+    }
+
+    private void setTitleList() {
+        titleList.add(context.getResources().getString(R.string.title_author));
+        titleList.add(context.getResources().getString(R.string.title_comment));
+        titleList.add(context.getResources().getString(R.string.title_created_years));
+        titleList.add(context.getResources().getString(R.string.title_created_months));
+        titleList.add(context.getResources().getString(R.string.title_created_days));
+        titleList.add(context.getResources().getString(R.string.title_created_hours));
     }
 }

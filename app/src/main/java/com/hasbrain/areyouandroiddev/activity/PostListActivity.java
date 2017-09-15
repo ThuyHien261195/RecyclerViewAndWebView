@@ -123,11 +123,11 @@ public class PostListActivity extends AppCompatActivity {
 
     private void bindDataToListView(List<RedditPost> postList) {
         if (listViewRedditPost != null) {
-            ListViewRedditPostAdapter lvRedditPostAdapter =
+            ListViewRedditPostAdapter listViewRedditPostAdapter =
                     new ListViewRedditPostAdapter(this, postList);
             View footerView = getLayoutInflater().inflate(R.layout.item_footer, null);
             listViewRedditPost.addFooterView(footerView);
-            listViewRedditPost.setAdapter(lvRedditPostAdapter);
+            listViewRedditPost.setAdapter(listViewRedditPostAdapter);
             setOnClickFooterView(footerView);
         }
     }
