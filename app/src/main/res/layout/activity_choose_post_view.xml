@@ -9,9 +9,14 @@
     tools:context="com.hasbrain.areyouandroiddev.activity.ChoosePostViewActivity">
 
     <Button
-        android:id="@+id/button_recycler_view"
+        android:id="@+id/button_portrait_recycler_view"
         style="@style/CommonButtonTheme"
-        android:text="@string/action_recycler_view" />
+        android:text="@string/action_portrait_recycler_view" />
+
+    <Button
+        android:id="@+id/button_landscape_recycler_view"
+        style="@style/CommonButtonTheme"
+        android:text="@string/action_landscape_recycler_view" />
 
     <Button
         android:id="@+id/button_list_view"
