@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/ls_item_post_bg"
     android:orientation="vertical"
-    android:padding="@dimen/post_card_view_spacing">
+    android:padding="@dimen/item_post_spacing">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="bottom"
-            android:textColor="@color/color_gray_title"
+            android:textColor="@color/color_post_title"
             android:textSize="@dimen/score_text_size" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_marginLeft="@dimen/text_view_horizontal_spacing"
             android:gravity="bottom"
             android:text="@string/title_author"
-            android:textColor="@color/color_gray_title" />
+            android:textColor="@color/color_post_title" />
     </LinearLayout>
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_view_vertical_spacing"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/title_text_size" />
 
     <TextView
@@ -43,6 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_view_vertical_spacing"
         android:text="@string/title_comment"
-        android:textColor="@color/color_gray_title"
+        android:textColor="@color/color_post_title"
         android:textSize="@dimen/title_comment_text_size" />
 </LinearLayout>
