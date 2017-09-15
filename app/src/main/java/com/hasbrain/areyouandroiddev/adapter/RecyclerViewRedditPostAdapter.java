@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.FormatStringUtil;
@@ -26,11 +27,15 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
     private List<Integer> colorTitleList = new ArrayList<Integer>();
     private List<String> titleList = new ArrayList<String>();
     private Context context;
+    private int orientationView;
     private List<RedditPost> redditPostList;
 
-    public RecyclerViewRedditPostAdapter(Context context, List<RedditPost> redditPostList) {
+    public RecyclerViewRedditPostAdapter(Context context,
+                                         List<RedditPost> redditPostList,
+                                         int orientationView) {
         this.context = context;
         this.redditPostList = redditPostList;
+        this.orientationView = orientationView;
         setColorTitleList();
         setTitleList();
     }
@@ -38,14 +43,15 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = null;
+        int layoutRes = getPostItemLayoutRes(viewType, orientationView);
         switch (viewType) {
             case ConstantCollection.CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_card_view_post, parent, false);
+                        .inflate(layoutRes, parent, false);
                 return new PostViewHolder(rowView);
             case ConstantCollection.FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_footer, parent, false);
+                        .inflate(layoutRes, parent, false);
                 setOnClickFooterView(rowView);
                 return new FooterViewHolder(rowView);
             default:
@@ -83,6 +89,26 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
+    private int getPostItemLayoutRes(int viewType, int orientationView){
+        switch (viewType) {
+            case ConstantCollection.CONTENT_VIEW:
+                if(orientationView == ConstantCollection.PORTRAIT_RECYCLER_VIEW){
+                    return R.layout.item_card_view_post;
+                }else{
+                    return R.layout.item_landscape_card_view_post;
+                }
+            case ConstantCollection.FOOTER_VIEW:
+                if(orientationView == ConstantCollection.PORTRAIT_RECYCLER_VIEW){
+                    return R.layout.item_portrait_footer;
+                }else{
+                    return R.layout.item_landscape_footer;
+                }
+            default:
+                break;
+        }
+        return 0;
+    }
+
     private void setOnClickFooterView(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +123,9 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
 
     private void bindContentView(PostViewHolder holder, int position) {
         final RedditPost redditPost = redditPostList.get(position);
-        String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
-                redditPost.getAuthor(),
-                redditPost.getSubreddit(),
-                colorTitleList.get(0));
         String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), titleList);
         holder.textViewScore.setText(String.valueOf(redditPost.getScore()));
-        holder.textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
+        setTextAuthorTitle(holder.textViewAuthor, redditPost);
         holder.textViewPostTitle.setText(redditPost.getTitle());
         if (redditPost.isStickyPost()) {
             holder.textViewPostTitle.setTextColor(colorTitleList.get(1));
@@ -120,6 +142,23 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
                 context.startActivity(postViewIntent);
             }
         });
+    }
+
+    private void setTextAuthorTitle(TextView textViewAuthor, RedditPost redditPost) {
+        switch (orientationView) {
+            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
+                String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
+                        redditPost.getAuthor(),
+                        redditPost.getSubreddit(),
+                        colorTitleList.get(0));
+                textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
+                break;
+            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
+                textViewAuthor.setText(redditPost.getAuthor());
+                break;
+            default:
+                break;
+        }
     }
 
     private void setColorTitleList() {

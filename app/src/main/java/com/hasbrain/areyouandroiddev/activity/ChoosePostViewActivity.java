@@ -20,11 +20,19 @@ public class ChoosePostViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.button_recycler_view)
+    @OnClick(R.id.button_portrait_recycler_view)
     public void onClickBtnViewByRecyclerView() {
         Intent intent = new Intent(this, PostListActivity.class);
         intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
                 ConstantCollection.PORTRAIT_RECYCLER_VIEW);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.button_landscape_recycler_view)
+    public void onClickBtnViewByLandscapeRV() {
+        Intent intent = new Intent(this, PostListActivity.class);
+        intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
+                ConstantCollection.LANDSCAPE_RECYCLER_VIEW);
         startActivity(intent);
     }
 

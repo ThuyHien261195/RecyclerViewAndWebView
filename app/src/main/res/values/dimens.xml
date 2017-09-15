@@ -11,7 +11,7 @@
     <dimen name="item_post_height">100dp</dimen>
     <dimen name="item_post_margin">5dp</dimen>
     <dimen name="btn_common_vertical_margin">20dp</dimen>
-    <dimen name="btn_common_width">140dp</dimen>
+    <dimen name="btn_common_width">200dp</dimen>
     <dimen name="item_post_radius">4dp</dimen>
     <dimen name="lv_divider_height">10dp</dimen>
     <dimen name="item_post_border">0.5dp</dimen>
@@ -19,4 +19,5 @@
     <dimen name="item_post_landscape_width">180dp</dimen>
     <dimen name="item_post_landscape_height">150dp</dimen>
     <dimen name="gv_item_spacing">10dp</dimen>
+    <dimen name="item_footer_title_text_size">15sp</dimen>
 </resources>

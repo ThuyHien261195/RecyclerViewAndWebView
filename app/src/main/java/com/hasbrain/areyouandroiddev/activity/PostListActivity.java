@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.R;
-import com.hasbrain.areyouandroiddev.adapter.ListViewRedditPostAdapter;
+import com.hasbrain.areyouandroiddev.adapter.GroupViewRedditPostAdapter;
 import com.hasbrain.areyouandroiddev.adapter.RecyclerViewRedditPostAdapter;
 import com.hasbrain.areyouandroiddev.datastore.FeedDataStore;
 import com.hasbrain.areyouandroiddev.datastore.FileBasedFeedDataStore;
@@ -13,12 +13,17 @@ import com.hasbrain.areyouandroiddev.model.RedditPost;
 import com.hasbrain.areyouandroiddev.model.RedditPostConverter;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -42,12 +47,17 @@ public class PostListActivity extends AppCompatActivity {
     @BindView(R.id.list_view_reddit_post)
     ListView listViewRedditPost;
 
+    @Nullable
+    @BindView(R.id.grid_view_reddit_post)
+    GridView gridViewRedditPost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
 
         ButterKnife.bind(this);
+        setScreenOrientation();
         initViews();
     }
 
@@ -80,12 +90,17 @@ public class PostListActivity extends AppCompatActivity {
 
     protected void displayPostList(List<RedditPost> postList) {
         switch (viewType) {
-            case ConstantCollection.RECYCLER_VIEW:
+            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
                 bindDataToRecyclerView(postList);
+                break;
+            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
+                bindDataToLandscapeRecyclerView(postList);
                 break;
             case ConstantCollection.LIST_VIEW:
                 bindDataToListView(postList);
                 break;
+            case ConstantCollection.GRID_VIEW:
+                bindDataToGridView(postList);
             default:
                 break;
         }
@@ -95,20 +110,44 @@ public class PostListActivity extends AppCompatActivity {
         getViewType();
         int layoutRes = 0;
         switch (viewType) {
-            case ConstantCollection.RECYCLER_VIEW:
+            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
+            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
                 layoutRes = R.layout.activity_post_recycler_view;
                 break;
             case ConstantCollection.LIST_VIEW:
                 layoutRes = R.layout.activity_post_list_view;
                 break;
+            case ConstantCollection.GRID_VIEW:
+                layoutRes = R.layout.activity_post_grid_view;
             default:
                 break;
         }
         return layoutRes;
     }
 
+    private void setScreenOrientation() {
+        switch (viewType){
+            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
+            case ConstantCollection.LIST_VIEW:
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                View layout = findViewById(R.id.layout_landscape_reddit_post);
+                layout.setBackgroundColor(ContextCompat.getColor(this,
+                        R.color.color_landscape_screen_bg));
+            case ConstantCollection.GRID_VIEW:
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+            default:
+                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+        }
+    }
+
+
     private void getViewType() {
-        viewType = getIntent().getIntExtra(ConstantCollection.EXTRA_NAME_LIST_VIEW_TYPE, 0);
+        viewType = getIntent().getIntExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE, 0);
     }
 
     private void bindDataToRecyclerView(List<RedditPost> postList) {
@@ -116,19 +155,42 @@ public class PostListActivity extends AppCompatActivity {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
             RecyclerViewRedditPostAdapter redditPostAdapter =
-                    new RecyclerViewRedditPostAdapter(this, postList);
+                    new RecyclerViewRedditPostAdapter(this,
+                            postList,
+                            ConstantCollection.PORTRAIT_RECYCLER_VIEW);
+            recyclerViewRedditPost.setAdapter(redditPostAdapter);
+        }
+    }
+
+    private void bindDataToLandscapeRecyclerView(List<RedditPost> postList) {
+        if (recyclerViewRedditPost != null) {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+            recyclerViewRedditPost.setLayoutManager(gridLayoutManager);
+            RecyclerViewRedditPostAdapter redditPostAdapter =
+                    new RecyclerViewRedditPostAdapter(this,
+                            postList,
+                            ConstantCollection.LANDSCAPE_RECYCLER_VIEW);
             recyclerViewRedditPost.setAdapter(redditPostAdapter);
         }
     }
 
     private void bindDataToListView(List<RedditPost> postList) {
         if (listViewRedditPost != null) {
-            ListViewRedditPostAdapter listViewRedditPostAdapter =
-                    new ListViewRedditPostAdapter(this, postList);
-            View footerView = getLayoutInflater().inflate(R.layout.item_footer, null);
+            GroupViewRedditPostAdapter listViewRedditPostAdapter =
+                    new GroupViewRedditPostAdapter(this, postList, ConstantCollection.LIST_VIEW);
+            View footerView = getLayoutInflater().inflate(R.layout.item_portrait_footer, null);
             listViewRedditPost.addFooterView(footerView);
             listViewRedditPost.setAdapter(listViewRedditPostAdapter);
             setOnClickFooterView(footerView);
+        }
+    }
+
+    private void bindDataToGridView(List<RedditPost> postList) {
+        if (gridViewRedditPost != null) {
+            postList.add(new RedditPost());
+            GroupViewRedditPostAdapter gridViewRedditPostAdapter =
+                    new GroupViewRedditPostAdapter(this, postList, ConstantCollection.GRID_VIEW);
+            gridViewRedditPost.setAdapter(gridViewRedditPostAdapter);
         }
     }
 
