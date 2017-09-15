@@ -89,18 +89,18 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
-    private int getPostItemLayoutRes(int viewType, int orientationView){
+    private int getPostItemLayoutRes(int viewType, int orientationView) {
         switch (viewType) {
             case ConstantCollection.CONTENT_VIEW:
-                if(orientationView == ConstantCollection.PORTRAIT_RECYCLER_VIEW){
+                if (orientationView == ConstantCollection.PORTRAIT_RECYCLER_VIEW) {
                     return R.layout.item_card_view_post;
-                }else{
+                } else {
                     return R.layout.item_landscape_card_view_post;
                 }
             case ConstantCollection.FOOTER_VIEW:
-                if(orientationView == ConstantCollection.PORTRAIT_RECYCLER_VIEW){
+                if (orientationView == ConstantCollection.PORTRAIT_RECYCLER_VIEW) {
                     return R.layout.item_portrait_footer;
-                }else{
+                } else {
                     return R.layout.item_landscape_footer;
                 }
             default:
