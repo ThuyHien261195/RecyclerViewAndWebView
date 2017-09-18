@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.FormatStringUtil;
@@ -57,6 +58,8 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         textViewPostTitle.setText(redditPost.getTitle());
         if (redditPost.isStickyPost()) {
             textViewPostTitle.setTextColor(colorTitleList.get(1));
+        } else {
+            textViewPostTitle.setTextColor(colorTitleList.get(2));
         }
         textViewComment.setText(String.format(titleList.get(1),
                 redditPost.getCommentCount(),

@@ -24,5 +24,10 @@ public class LandscapePostViewHolder extends PostViewHolder {
                                     RedditPost redditPost) {
         super.bindContentPostView(context, titleList, colorTitleList, redditPost);
         textViewAuthor.setText(redditPost.getAuthor());
+        if (redditPost.isStickyPost()) {
+            textViewPostTitle.setTextColor(colorTitleList.get(1));
+        } else {
+            textViewPostTitle.setTextColor(colorTitleList.get(3));
+        }
     }
 }

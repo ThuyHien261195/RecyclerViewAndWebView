@@ -3,15 +3,14 @@ package com.hasbrain.areyouandroiddev.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
-import com.hasbrain.areyouandroiddev.FormatStringUtil;
+import com.hasbrain.areyouandroiddev.ListViewUtil;
 import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
@@ -34,8 +33,8 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
                                          List<RedditPost> redditPostList) {
         this.context = context;
         this.redditPostList = redditPostList;
-        setColorTitleList();
-        setTitleList();
+        titleList = ListViewUtil.setTitleList(context);
+        colorTitleList = ListViewUtil.setColorTitleList(context);
     }
 
     @Override
@@ -119,19 +118,5 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
                 context.startActivity(postViewIntent);
             }
         });
-    }
-
-    private void setColorTitleList() {
-        colorTitleList.add(ContextCompat.getColor(context, R.color.color_author_title));
-        colorTitleList.add(ContextCompat.getColor(context, R.color.color_sticky_post));
-    }
-
-    private void setTitleList() {
-        titleList.add(context.getResources().getString(R.string.title_author));
-        titleList.add(context.getResources().getString(R.string.title_comment));
-        titleList.add(context.getResources().getString(R.string.title_created_years));
-        titleList.add(context.getResources().getString(R.string.title_created_months));
-        titleList.add(context.getResources().getString(R.string.title_created_days));
-        titleList.add(context.getResources().getString(R.string.title_created_hours));
     }
 }

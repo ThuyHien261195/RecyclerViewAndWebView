@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.FormatStringUtil;
+import com.hasbrain.areyouandroiddev.ListViewUtil;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
@@ -36,8 +37,8 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
         super(context, R.layout.item_list_view_post, redditPostList);
         this.context = context;
         this.redditPostList = redditPostList;
-        setColorTitleList();
-        setTitleList();
+        titleList = ListViewUtil.setTitleList(context);
+        colorTitleList = ListViewUtil.setColorTitleList(context);
     }
 
     @Override
@@ -100,6 +101,8 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
             holder.textViewPostTitle.setText(redditPost.getTitle());
             if (redditPost.isStickyPost()) {
                 holder.textViewPostTitle.setTextColor(colorTitleList.get(1));
+            } else {
+                holder.textViewPostTitle.setTextColor(colorTitleList.get(3));
             }
             holder.textViewComment.setText(String.format(titleList.get(1),
                     redditPost.getCommentCount(),
@@ -115,20 +118,6 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
                 }
             });
         }
-    }
-
-    private void setColorTitleList() {
-        colorTitleList.add(ContextCompat.getColor(context, R.color.color_author_title));
-        colorTitleList.add(ContextCompat.getColor(context, R.color.color_sticky_post));
-    }
-
-    private void setTitleList() {
-        titleList.add(context.getResources().getString(R.string.title_author));
-        titleList.add(context.getResources().getString(R.string.title_comment));
-        titleList.add(context.getResources().getString(R.string.title_created_years));
-        titleList.add(context.getResources().getString(R.string.title_created_months));
-        titleList.add(context.getResources().getString(R.string.title_created_days));
-        titleList.add(context.getResources().getString(R.string.title_created_hours));
     }
 
     static class PostViewHolder {
