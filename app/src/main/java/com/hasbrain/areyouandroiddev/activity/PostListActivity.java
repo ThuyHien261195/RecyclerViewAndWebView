@@ -15,6 +15,7 @@ import com.hasbrain.areyouandroiddev.model.RedditPostConverter;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -38,6 +39,7 @@ public class PostListActivity extends AppCompatActivity {
     public static final String DATA_JSON_FILE_NAME = "data.json";
     private FeedDataStore feedDataStore;
     private int viewType = 0;
+    private RecyclerViewRedditPostAdapter redditPostAdapter;
 
     @Nullable
     @BindView(R.id.recycler_view_reddit_post)
@@ -90,11 +92,8 @@ public class PostListActivity extends AppCompatActivity {
 
     protected void displayPostList(List<RedditPost> postList) {
         switch (viewType) {
-            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
+            case ConstantCollection.RECYCLER_VIEW:
                 bindDataToRecyclerView(postList);
-                break;
-            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
-                bindDataToLandscapeRecyclerView(postList);
                 break;
             case ConstantCollection.LIST_VIEW:
                 bindDataToListView(postList);
@@ -110,8 +109,7 @@ public class PostListActivity extends AppCompatActivity {
         getViewType();
         int layoutRes = 0;
         switch (viewType) {
-            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
-            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
+            case ConstantCollection.RECYCLER_VIEW:
                 layoutRes = R.layout.activity_post_recycler_view;
                 break;
             case ConstantCollection.LIST_VIEW:
@@ -125,22 +123,21 @@ public class PostListActivity extends AppCompatActivity {
         return layoutRes;
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setLayoutPostView();
+    }
+
     private void setScreenOrientation() {
         switch (viewType) {
-            case ConstantCollection.PORTRAIT_RECYCLER_VIEW:
             case ConstantCollection.LIST_VIEW:
                 this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 break;
-            case ConstantCollection.LANDSCAPE_RECYCLER_VIEW:
-                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                View layout = findViewById(R.id.layout_landscape_reddit_post);
-                layout.setBackgroundColor(ContextCompat.getColor(this,
-                        R.color.color_landscape_screen_bg));
             case ConstantCollection.GRID_VIEW:
                 this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
             default:
-                this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 break;
         }
     }
@@ -150,27 +147,34 @@ public class PostListActivity extends AppCompatActivity {
         viewType = getIntent().getIntExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE, 0);
     }
 
-    private void bindDataToRecyclerView(List<RedditPost> postList) {
-        if (recyclerViewRedditPost != null) {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-            recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
-            RecyclerViewRedditPostAdapter redditPostAdapter =
-                    new RecyclerViewRedditPostAdapter(this,
-                            postList,
-                            ConstantCollection.PORTRAIT_RECYCLER_VIEW);
-            recyclerViewRedditPost.setAdapter(redditPostAdapter);
+    private void setLayoutPostView(){
+        int orientation =  getResources().getConfiguration().orientation;
+        View layout = findViewById(R.id.layout_landscape_reddit_post);
+        switch (orientation){
+            case Configuration.ORIENTATION_PORTRAIT:
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
+
+                layout.setBackgroundColor(ContextCompat.getColor(this,
+                        android.R.color.white));
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+                recyclerViewRedditPost.setLayoutManager(gridLayoutManager);
+
+                layout.setBackgroundColor(ContextCompat.getColor(this,
+                        R.color.color_landscape_screen_bg));
+                break;
+            default:
+                break;
         }
+        recyclerViewRedditPost.setAdapter(redditPostAdapter);
     }
 
-    private void bindDataToLandscapeRecyclerView(List<RedditPost> postList) {
+    private void bindDataToRecyclerView(List<RedditPost> postList) {
         if (recyclerViewRedditPost != null) {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-            recyclerViewRedditPost.setLayoutManager(gridLayoutManager);
-            RecyclerViewRedditPostAdapter redditPostAdapter =
-                    new RecyclerViewRedditPostAdapter(this,
-                            postList,
-                            ConstantCollection.LANDSCAPE_RECYCLER_VIEW);
-            recyclerViewRedditPost.setAdapter(redditPostAdapter);
+            redditPostAdapter = new RecyclerViewRedditPostAdapter(this, postList);
+            setLayoutPostView();
         }
     }
 
@@ -178,7 +182,7 @@ public class PostListActivity extends AppCompatActivity {
         if (listViewRedditPost != null) {
             ListViewRedditPostAdapter listViewRedditPostAdapter =
                     new ListViewRedditPostAdapter(this, postList);
-            View footerView = getLayoutInflater().inflate(R.layout.item_portrait_footer, null);
+            View footerView = getLayoutInflater().inflate(R.layout.item_footer, null);
             listViewRedditPost.addFooterView(footerView);
             listViewRedditPost.setAdapter(listViewRedditPostAdapter);
             setOnClickFooterView(footerView);
