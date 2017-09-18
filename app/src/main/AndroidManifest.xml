@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PostListActivity" />
+        <activity android:name=".activity.PostListActivity"
+            android:configChanges="orientation"/>
         <activity android:name=".activity.PostViewActivity" />
     </application>
 

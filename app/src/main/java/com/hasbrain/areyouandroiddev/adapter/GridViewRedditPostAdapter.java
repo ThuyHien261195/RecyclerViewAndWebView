@@ -58,7 +58,7 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
                     break;
                 case ConstantCollection.FOOTER_VIEW:
                     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                    rowView = inflater.inflate(R.layout.item_landscape_footer, parent, false);
+                    rowView = inflater.inflate(R.layout.item_footer, parent, false);
                     break;
                 default:
                     break;
