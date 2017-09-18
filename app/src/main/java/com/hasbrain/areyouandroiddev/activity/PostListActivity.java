@@ -38,7 +38,7 @@ public class PostListActivity extends AppCompatActivity {
 
     public static final String DATA_JSON_FILE_NAME = "data.json";
     private FeedDataStore feedDataStore;
-    private int viewType = 0;
+    protected int viewType = 0;
     private RecyclerViewRedditPostAdapter redditPostAdapter;
 
     @Nullable
