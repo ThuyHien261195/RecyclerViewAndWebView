@@ -142,31 +142,33 @@ public class PostListActivity extends AppCompatActivity {
         }
     }
 
-
-    private void getViewType() {
+    protected void getViewType() {
         viewType = getIntent().getIntExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE, 0);
     }
 
     private void setLayoutPostView() {
         int orientation = getResources().getConfiguration().orientation;
         View layout = findViewById(R.id.layout_landscape_reddit_post);
-        switch (orientation) {
-            case Configuration.ORIENTATION_PORTRAIT:
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
 
-                layout.setBackgroundColor(ContextCompat.getColor(this,
-                        android.R.color.white));
-                break;
-            case Configuration.ORIENTATION_LANDSCAPE:
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-                recyclerViewRedditPost.setLayoutManager(gridLayoutManager);
+        if (recyclerViewRedditPost != null) {
+            switch (orientation) {
+                case Configuration.ORIENTATION_PORTRAIT:
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                    recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
 
-                layout.setBackgroundColor(ContextCompat.getColor(this,
-                        R.color.color_landscape_screen_bg));
-                break;
-            default:
-                break;
+                    layout.setBackgroundColor(ContextCompat.getColor(this,
+                            android.R.color.white));
+                    break;
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+                    recyclerViewRedditPost.setLayoutManager(gridLayoutManager);
+
+                    layout.setBackgroundColor(ContextCompat.getColor(this,
+                            R.color.color_landscape_screen_bg));
+                    break;
+                default:
+                    break;
+            }
         }
         recyclerViewRedditPost.setAdapter(redditPostAdapter);
     }
