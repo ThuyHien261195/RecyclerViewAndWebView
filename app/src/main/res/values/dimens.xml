@@ -2,24 +2,35 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="item_post_spacing">10dp</dimen>
+
+    <!-- Text size of title. -->
     <dimen name="score_text_size">20sp</dimen>
     <dimen name="title_text_size">18sp</dimen>
     <dimen name="title_comment_text_size">10sp</dimen>
+    <dimen name="item_footer_title_text_size">15sp</dimen>
+
+    <!-- Common text view spacing. -->
     <dimen name="text_view_horizontal_spacing">5dp</dimen>
     <dimen name="text_view_vertical_spacing">5dp</dimen>
+
+    <!-- Item post properties. -->
     <dimen name="item_post_height">100dp</dimen>
     <dimen name="item_post_margin">5dp</dimen>
-    <dimen name="btn_common_vertical_margin">20dp</dimen>
-    <dimen name="btn_common_width">200dp</dimen>
-    <dimen name="item_post_radius">4dp</dimen>
-    <dimen name="lv_divider_height">10dp</dimen>
-    <dimen name="item_post_border">0.5dp</dimen>
+    <dimen name="item_post_spacing">10dp</dimen>
     <dimen name="item_footer_vertical_padding">15dp</dimen>
     <dimen name="item_post_landscape_width">180dp</dimen>
     <dimen name="item_post_landscape_height">150dp</dimen>
-    <dimen name="gv_item_spacing">10dp</dimen>
-    <dimen name="item_footer_title_text_size">15sp</dimen>
-    <dimen name="expandable_lv_divider_height">1dp</dimen>
+    <dimen name="item_post_radius">4dp</dimen>
+    <dimen name="item_post_border">0.5dp</dimen>
     <dimen name="item_group_spacing">10dp</dimen>
+
+    <!-- Common button properties. -->
+    <dimen name="btn_common_vertical_margin">20dp</dimen>
+    <dimen name="btn_common_width">200dp</dimen>
+
+    <!-- List/Grid/Recycler view properties. -->
+    <dimen name="lv_divider_height">10dp</dimen>
+    <dimen name="gv_item_spacing">10dp</dimen>
+    <dimen name="expandable_list_divider_height">1dp</dimen>
+    <dimen name="divider_spacing">10dp</dimen>
 </resources>
