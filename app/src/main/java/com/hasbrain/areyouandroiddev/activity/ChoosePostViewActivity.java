@@ -20,7 +20,7 @@ public class ChoosePostViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.button_portrait_recycler_view)
+    @OnClick(R.id.button_recycler_view)
     public void onClickBtnViewByRecyclerView() {
         Intent intent = new Intent(this, PostListActivity.class);
         startActivity(intent);
@@ -39,6 +39,12 @@ public class ChoosePostViewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PostListActivity.class);
         intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
                 ConstantCollection.GRID_VIEW);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.button_expandable_lv)
+    public void onClickBtnExpandableListView() {
+        Intent intent = new Intent(this, PostInSectionActivity.class);
         startActivity(intent);
     }
 }
