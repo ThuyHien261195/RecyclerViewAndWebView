@@ -44,7 +44,7 @@ public class PostInSectionActivity extends PostListActivity {
         return R.layout.activity_post_in_section;
     }
 
-    private List<String> createGroupHeaderList(){
+    private List<String> createGroupHeaderList() {
         List<String> groupHeaderList = new ArrayList<>();
         groupHeaderList.add(getResources().getString(R.string.title_sticky_posts));
         groupHeaderList.add(getResources().getString(R.string.title_normal_posts));
@@ -52,16 +52,16 @@ public class PostInSectionActivity extends PostListActivity {
     }
 
     private HashMap<String, List<RedditPost>> createRedditPostChildList(
-            List<String> groupHeaderList, List<RedditPost> postList){
+            List<String> groupHeaderList, List<RedditPost> postList) {
         HashMap<String, List<RedditPost>> redditPostChildList = new HashMap<>();
         List<RedditPost> stickyPostList = new ArrayList<>();
         List<RedditPost> normalPostList = new ArrayList<>();
 
         for (RedditPost postItem :
-             postList) {
-            if(postItem.isStickyPost()){
+                postList) {
+            if (postItem.isStickyPost()) {
                 stickyPostList.add(postItem);
-            }else{
+            } else {
                 normalPostList.add(postItem);
             }
         }

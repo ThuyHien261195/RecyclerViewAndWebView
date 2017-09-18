@@ -16,7 +16,7 @@ public class ExpandableGroupViewHolder {
     @BindView(R.id.text_group_header)
     TextView textViewGroupHeader;
 
-    public ExpandableGroupViewHolder(View view){
+    public ExpandableGroupViewHolder(View view) {
         ButterKnife.bind(this, view);
     }
 }

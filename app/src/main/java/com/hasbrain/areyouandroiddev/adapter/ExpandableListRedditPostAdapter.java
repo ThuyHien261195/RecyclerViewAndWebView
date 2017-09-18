@@ -28,7 +28,7 @@ public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
     private HashMap<String, List<RedditPost>> postDataChildList;
 
     public ExpandableListRedditPostAdapter(Context context, List<String> postGroupHeader,
-                                           HashMap<String, List<RedditPost>> postDataChildList){
+                                           HashMap<String, List<RedditPost>> postDataChildList) {
         this.context = context;
         this.postGroupHeaderList = postGroupHeader;
         this.postDataChildList = postDataChildList;
@@ -76,7 +76,7 @@ public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View groupRowView = convertView;
-        if (groupRowView == null){
+        if (groupRowView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             groupRowView = inflater.inflate(R.layout.item_group_expand_lv_post, parent, false);
             ExpandableGroupViewHolder groupViewHolder = new ExpandableGroupViewHolder(groupRowView);
@@ -90,7 +90,7 @@ public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View childRowView = convertView;
-        if(childRowView == null){
+        if (childRowView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             childRowView = inflater.inflate(R.layout.item_list_view_post, parent, false);
             PostViewHolder postViewHolder = new PostViewHolder(childRowView);
