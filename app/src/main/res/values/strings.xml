@@ -4,12 +4,13 @@
     <string name="title_comment">%1$d Comments . %2$s . %3$s</string>
     <string name="title_see_more">See more interesting posts about Android development
         at https://www.reddit.com/r/androiddev/</string>
-    <string name="action_portrait_recycler_view">Recycler View</string>
-    <string name="action_landscape_recycler_view">Landscape Recycler View</string>
+    <string name="action_recycler_view">Recycler View</string>
     <string name="action_list_view">List View</string>
     <string name="action_grid_view">Grid View</string>
     <string name="title_created_hours">%1$d hours ago</string>
     <string name="title_created_days">%1$d days ago</string>
     <string name="title_created_months">%1$d months ago</string>
     <string name="title_created_years">%1$d years ago</string>
+    <string name="title_sticky_posts">Sticky posts</string>
+    <string name="title_normal_posts">Normal posts</string>
 </resources>

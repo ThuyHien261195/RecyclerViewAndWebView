@@ -20,4 +20,6 @@
     <dimen name="item_post_landscape_height">150dp</dimen>
     <dimen name="gv_item_spacing">10dp</dimen>
     <dimen name="item_footer_title_text_size">15sp</dimen>
+    <dimen name="expandable_lv_divider_height">1dp</dimen>
+    <dimen name="item_group_spacing">10dp</dimen>
 </resources>
