@@ -1,7 +1,6 @@
 package com.hasbrain.areyouandroiddev.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import java.util.List;
  * Created by thuyhien on 9/18/17.
  */
 
-public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
+public class ExpandListViewRedditPostAdapter extends BaseExpandableListAdapter {
 
     private List<Integer> colorTitleList = new ArrayList<Integer>();
     private List<String> titleList = new ArrayList<String>();
@@ -27,7 +26,7 @@ public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
     private List<String> postGroupHeaderList;
     private HashMap<String, List<RedditPost>> postDataChildList;
 
-    public ExpandableListRedditPostAdapter(Context context, List<String> postGroupHeader,
+    public ExpandListViewRedditPostAdapter(Context context, List<String> postGroupHeader,
                                            HashMap<String, List<RedditPost>> postDataChildList) {
         this.context = context;
         this.postGroupHeaderList = postGroupHeader;
@@ -79,7 +78,7 @@ public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
         if (groupRowView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             groupRowView = inflater.inflate(R.layout.item_group_expand_lv_post, parent, false);
-            ExpandableGroupViewHolder groupViewHolder = new ExpandableGroupViewHolder(groupRowView);
+            ExpandListViewGroupViewHolder groupViewHolder = new ExpandListViewGroupViewHolder(groupRowView);
             groupRowView.setTag(groupViewHolder);
         }
 
@@ -107,7 +106,7 @@ public class ExpandableListRedditPostAdapter extends BaseExpandableListAdapter {
     }
 
     private void bindGroupView(View groupRowView, int groupPosition) {
-        ExpandableGroupViewHolder groupViewHolder = (ExpandableGroupViewHolder) groupRowView.getTag();
+        ExpandListViewGroupViewHolder groupViewHolder = (ExpandListViewGroupViewHolder) groupRowView.getTag();
         groupViewHolder.textViewGroupHeader.setText(postGroupHeaderList.get(groupPosition));
     }
 
