@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <ExpandableListView
+        android:id="@+id/expandable_lv_reddit_post"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/color_divider"
+        android:dividerHeight="@dimen/expandable_lv_divider_height" />
 </LinearLayout>
