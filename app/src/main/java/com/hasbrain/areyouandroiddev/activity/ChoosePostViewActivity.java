@@ -42,9 +42,19 @@ public class ChoosePostViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.button_expandable_lv)
+    @OnClick(R.id.button_expandable_list)
     public void onClickBtnExpandableListView() {
         Intent intent = new Intent(this, PostInSectionActivity.class);
+        intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
+                ConstantCollection.EXPANDABLE_LIST_VIEW);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.button_expanable_recycler)
+    public void onClickBtnExpandableRecyclerView() {
+        Intent intent = new Intent(this, PostInSectionActivity.class);
+        intent.putExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE,
+                ConstantCollection.EXPANDABLE_RECYCLER_VIEW);
         startActivity(intent);
     }
 }

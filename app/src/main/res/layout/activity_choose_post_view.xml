@@ -24,7 +24,12 @@
         android:text="@string/action_grid_view" />
 
     <Button
-        android:id="@+id/button_expandable_lv"
+        android:id="@+id/button_expandable_list"
         style="@style/CommonButtonTheme"
         android:text="@string/action_expandable_list_view" />
+
+    <Button
+        android:id="@+id/button_expanable_recycler"
+        style="@style/CommonButtonTheme"
+        android:text="@string/action_expandable_recycler_view" />
 </LinearLayout>
