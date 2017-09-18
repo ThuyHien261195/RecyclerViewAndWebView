@@ -46,7 +46,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
     public void bindContentPostView(final Context context, List<String> titleList,
                                     List<Integer> colorTitleList,
-                                    final RedditPost redditPost){
+                                    final RedditPost redditPost) {
         String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), titleList);
         textViewScore.setText(String.valueOf(redditPost.getScore()));
         String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),

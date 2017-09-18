@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LandscapePostViewHolder extends PostViewHolder {
 
-    public LandscapePostViewHolder(View view){
+    public LandscapePostViewHolder(View view) {
         super(view);
     }
 

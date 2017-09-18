@@ -147,10 +147,10 @@ public class PostListActivity extends AppCompatActivity {
         viewType = getIntent().getIntExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE, 0);
     }
 
-    private void setLayoutPostView(){
-        int orientation =  getResources().getConfiguration().orientation;
+    private void setLayoutPostView() {
+        int orientation = getResources().getConfiguration().orientation;
         View layout = findViewById(R.id.layout_landscape_reddit_post);
-        switch (orientation){
+        switch (orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 recyclerViewRedditPost.setLayoutManager(linearLayoutManager);

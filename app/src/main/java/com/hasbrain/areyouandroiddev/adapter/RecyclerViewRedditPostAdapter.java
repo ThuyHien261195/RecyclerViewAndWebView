@@ -47,9 +47,9 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
                         .inflate(R.layout.item_card_view_post, parent, false);
 
                 int orientation = context.getResources().getConfiguration().orientation;
-                if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                     return new PostViewHolder(rowView);
-                }else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+                } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                     return new LandscapePostViewHolder(rowView);
                 }
             case ConstantCollection.FOOTER_VIEW:
@@ -92,7 +92,7 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
-    private void bindContentView(RecyclerView.ViewHolder viewHolder, int position){
+    private void bindContentView(RecyclerView.ViewHolder viewHolder, int position) {
         int orientation = context.getResources().getConfiguration().orientation;
         final RedditPost redditPost = redditPostList.get(position);
         switch (orientation) {
