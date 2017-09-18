@@ -1,12 +1,15 @@
 package com.hasbrain.areyouandroiddev.activity;
 
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.R;
-import com.hasbrain.areyouandroiddev.adapter.ExpandableListRedditPostAdapter;
+import com.hasbrain.areyouandroiddev.adapter.ExpandListViewRedditPostAdapter;
+import com.hasbrain.areyouandroiddev.adapter.ExpandRecyclerViewGroupAdapter;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
 import java.util.ArrayList;
@@ -23,6 +26,10 @@ public class PostInSectionActivity extends PostListActivity {
     @Nullable
     @BindView(R.id.expandable_lv_reddit_post)
     ExpandableListView expandableListRedditPost;
+
+    @Nullable
+    @BindView(R.id.recycler_view_reddit_post)
+    RecyclerView expandableRecyclerViewPost;
 
     @Override
     protected void displayPostList(List<RedditPost> postList) {
@@ -45,6 +52,7 @@ public class PostInSectionActivity extends PostListActivity {
 
     @Override
     protected int getLayoutResource() {
+        getViewType();
         int layoutRes = 0;
         switch (viewType) {
             case ConstantCollection.EXPANDABLE_LIST_VIEW:
@@ -61,8 +69,8 @@ public class PostInSectionActivity extends PostListActivity {
 
     private void bindDataToExpandableListView(
             List<String> groupHeaderList, HashMap<String, List<RedditPost>> redditPostChildList) {
-        ExpandableListRedditPostAdapter redditPostAdapter =
-                new ExpandableListRedditPostAdapter(this, groupHeaderList, redditPostChildList);
+        ExpandListViewRedditPostAdapter redditPostAdapter =
+                new ExpandListViewRedditPostAdapter(this, groupHeaderList, redditPostChildList);
         expandableListRedditPost.setAdapter(redditPostAdapter);
         View footerView = this.getLayoutInflater().inflate(R.layout.item_footer, null);
         expandableListRedditPost.addFooterView(footerView);
@@ -70,7 +78,11 @@ public class PostInSectionActivity extends PostListActivity {
 
     private void bindDataToExpandableRecyclerView(
             List<String> groupHeaderList, HashMap<String, List<RedditPost>> redditPostChildList) {
-
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        expandableRecyclerViewPost.setLayoutManager(linearLayoutManager);
+        ExpandRecyclerViewGroupAdapter redditPostAdapter =
+                new ExpandRecyclerViewGroupAdapter(this, groupHeaderList, redditPostChildList);
+        expandableRecyclerViewPost.setAdapter(redditPostAdapter);
     }
 
     private List<String> createGroupHeaderList() {
