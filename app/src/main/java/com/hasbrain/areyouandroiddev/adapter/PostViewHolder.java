@@ -2,6 +2,7 @@ package com.hasbrain.areyouandroiddev.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,8 +15,11 @@ import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
+import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindColor;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -40,38 +44,59 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.text_comment)
     TextView textViewComment;
 
+    @BindString(R.string.title_author)
+    String authorText;
+
+    @BindString(R.string.title_comment)
+    String commentText;
+
+    @BindColor(R.color.color_author_title)
+    int authorColor;
+
+    @BindColor(R.color.color_sticky_post)
+    int stickyColor;
+
+    @BindColor(R.color.color_normal_post)
+    int normalColor;
+
+    protected RedditPost post;
+
     PostViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent postViewIntent = new Intent(v.getContext(), PostViewActivity.class);
+                postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL, post.getUrl());
+                v.getContext().startActivity(postViewIntent);
+            }
+        });
     }
 
-    public void bindContentPostView(final Context context, List<String> titleList,
-                                    List<Integer> colorTitleList,
-                                    final RedditPost redditPost) {
-        String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), titleList);
+    public void bindContentPostView(final RedditPost redditPost, HashMap<String, String> timeTitleList) {
+        this.post = redditPost;
+        String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), timeTitleList);
         textViewScore.setText(String.valueOf(redditPost.getScore()));
-        String authorTitle = FormatStringUtil.formatAuthorTitle(titleList.get(0),
-                redditPost.getAuthor(),
-                redditPost.getSubreddit(),
-                colorTitleList.get(0));
-        textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
         textViewPostTitle.setText(redditPost.getTitle());
         if (redditPost.isStickyPost()) {
-            textViewPostTitle.setTextColor(colorTitleList.get(1));
+            textViewPostTitle.setTextColor(stickyColor);
         } else {
-            textViewPostTitle.setTextColor(colorTitleList.get(2));
+            textViewPostTitle.setTextColor(normalColor);
         }
-        textViewComment.setText(String.format(titleList.get(1),
+        textViewComment.setText(String.format(commentText,
                 redditPost.getCommentCount(),
                 redditPost.getDomain(),
                 postTime));
-        linearLayoutRedditPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent postViewIntent = new Intent(context, PostViewActivity.class);
-                postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL, redditPost.getUrl());
-                context.startActivity(postViewIntent);
-            }
-        });
+
+        bindAuthorText();
+    }
+
+    protected void bindAuthorText() {
+        String authorTitle = FormatStringUtil.formatAuthorTitle(authorText,
+                post.getAuthor(),
+                post.getSubreddit(),
+                authorColor);
+        textViewAuthor.setText(FormatStringUtil.fromHtml(authorTitle));
     }
 }

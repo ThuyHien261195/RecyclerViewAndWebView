@@ -20,8 +20,6 @@ import butterknife.ButterKnife;
  */
 
 public class ExpandRVGroupViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.linear_layout_child_post)
-    LinearLayout linearLayoutChildPost;
 
     @BindView(R.id.text_group_header)
     TextView textViewGroupHeader;
@@ -34,6 +32,12 @@ public class ExpandRVGroupViewHolder extends RecyclerView.ViewHolder {
     ExpandRVGroupViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandChildPostList();
+            }
+        });
     }
 
     public void bindGroupHeaderView(
@@ -45,13 +49,6 @@ public class ExpandRVGroupViewHolder extends RecyclerView.ViewHolder {
         ExpandRecyclerViewChildAdapter expandRecyclerViewChildAdapter =
                 new ExpandRecyclerViewChildAdapter(context, redditPostList);
         recyclerViewPostChild.setAdapter(expandRecyclerViewChildAdapter);
-
-        linearLayoutChildPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandChildPostList();
-            }
-        });
     }
 
     private void expandChildPostList() {

@@ -15,11 +15,11 @@ import butterknife.ButterKnife;
  * Created by thuyhien on 9/14/17.
  */
 
-public class FooterViewHolder extends RecyclerView.ViewHolder{
+public class FooterViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.text_footer)
     TextView textViewFooter;
 
-    FooterViewHolder(View view){
+    FooterViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);
     }
