@@ -5,9 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="color_post_title">#696969</color>
     <color name="color_sticky_post">#378801</color>
+    <color name="color_normal_post">#000000</color>
     <color name="color_author_title">#0A295A</color>
     <color name="color_portrait_screen_bg">#f2f2f2</color>
-    <color name="color_landscape_screen_bg">#4c4c4c</color>
+    <color name="color_screen_bg">#FFFFFF</color>
     <color name="color_grid_item_bg">#191919</color>
     <color name="color_landscape_post_title">#e5e6e7</color>
     <color name="color_landscape_author_title">#005f7f</color>

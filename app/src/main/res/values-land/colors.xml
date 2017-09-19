@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_screen_bg">#4c4c4c</color>
+    <color name="color_normal_post">#FFFFFF</color>
+</resources>
