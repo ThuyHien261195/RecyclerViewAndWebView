@@ -7,15 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.hasbrain.areyouandroiddev.ConstantCollection;
-import com.hasbrain.areyouandroiddev.ListViewUtil;
+import com.hasbrain.areyouandroiddev.FormatStringUtil;
 import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,35 +23,29 @@ import java.util.List;
  */
 
 public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static final int CONTENT_VIEW = 0;
+    public static final int FOOTER_VIEW = 1;
 
-    private List<Integer> colorTitleList = new ArrayList<Integer>();
-    private List<String> titleList = new ArrayList<String>();
-    private Context context;
+    private final int orientation;
     private List<RedditPost> redditPostList;
+    private HashMap<String, String> timeTitleList;
 
-    public RecyclerViewRedditPostAdapter(Context context,
-                                         List<RedditPost> redditPostList) {
-        this.context = context;
+    public RecyclerViewRedditPostAdapter(Context context, List<RedditPost> redditPostList) {
         this.redditPostList = redditPostList;
-        titleList = ListViewUtil.setTitleList(context);
-        colorTitleList = ListViewUtil.setColorTitleList(context);
+        this.timeTitleList = FormatStringUtil.createTimeTitleList(context);
+        orientation = context.getResources().getConfiguration().orientation;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = null;
         switch (viewType) {
-            case ConstantCollection.CONTENT_VIEW:
+            case CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_card_view_post, parent, false);
 
-                int orientation = context.getResources().getConfiguration().orientation;
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    return new PostViewHolder(rowView);
-                } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    return new LandscapePostViewHolder(rowView);
-                }
-            case ConstantCollection.FOOTER_VIEW:
+                return createContentViewHolder(rowView);
+            case FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_footer, parent, false);
                 setOnClickFooterView(rowView);
@@ -62,14 +56,25 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
         return null;
     }
 
+    private PostViewHolder createContentViewHolder(View rowView) {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            return new PostViewHolder(rowView);
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return new LandscapePostViewHolder(rowView);
+        }
+
+        return null;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
         switch (viewType) {
-            case ConstantCollection.CONTENT_VIEW:
-                bindContentView(holder, position);
+            case CONTENT_VIEW:
+                ((PostViewHolder) holder).bindContentPostView(
+                        redditPostList.get(position), timeTitleList);
                 break;
-            case ConstantCollection.FOOTER_VIEW:
+            case FOOTER_VIEW:
                 break;
             default:
                 break;
@@ -85,37 +90,20 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public int getItemViewType(int position) {
         if (position == redditPostList.size()) {
-            return ConstantCollection.FOOTER_VIEW;
+            return FOOTER_VIEW;
         } else {
-            return ConstantCollection.CONTENT_VIEW;
+            return CONTENT_VIEW;
         }
     }
 
-    private void bindContentView(RecyclerView.ViewHolder viewHolder, int position) {
-        int orientation = context.getResources().getConfiguration().orientation;
-        final RedditPost redditPost = redditPostList.get(position);
-        switch (orientation) {
-            case Configuration.ORIENTATION_PORTRAIT:
-                ((PostViewHolder) viewHolder).bindContentPostView(context,
-                        titleList, colorTitleList, redditPost);
-                break;
-            case Configuration.ORIENTATION_LANDSCAPE:
-                ((LandscapePostViewHolder) viewHolder).bindContentPostView(context,
-                        titleList, colorTitleList, redditPost);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void setOnClickFooterView(View view) {
+    private void setOnClickFooterView(final View view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent postViewIntent = new Intent(context, PostViewActivity.class);
+                Intent postViewIntent = new Intent(view.getContext(), PostViewActivity.class);
                 postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL,
                         ConstantCollection.EXTRA_VALUE_MORE_INFO_URL);
-                context.startActivity(postViewIntent);
+                view.getContext().startActivity(postViewIntent);
             }
         });
     }

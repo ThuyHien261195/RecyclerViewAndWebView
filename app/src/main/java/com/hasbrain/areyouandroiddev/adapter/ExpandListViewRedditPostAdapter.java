@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
-import com.hasbrain.areyouandroiddev.ListViewUtil;
+import com.hasbrain.areyouandroiddev.FormatStringUtil;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
@@ -20,19 +20,17 @@ import java.util.List;
 
 public class ExpandListViewRedditPostAdapter extends BaseExpandableListAdapter {
 
-    private List<Integer> colorTitleList = new ArrayList<Integer>();
-    private List<String> titleList = new ArrayList<String>();
     private Context context;
     private List<String> postGroupHeaderList;
     private HashMap<String, List<RedditPost>> postDataChildList;
+    private HashMap<String, String> timeTitleList;
 
     public ExpandListViewRedditPostAdapter(Context context, List<String> postGroupHeader,
                                            HashMap<String, List<RedditPost>> postDataChildList) {
         this.context = context;
         this.postGroupHeaderList = postGroupHeader;
         this.postDataChildList = postDataChildList;
-        titleList = ListViewUtil.setTitleList(context);
-        colorTitleList = ListViewUtil.setColorTitleList(context);
+        this.timeTitleList = FormatStringUtil.createTimeTitleList(context);
     }
 
     @Override
@@ -113,6 +111,6 @@ public class ExpandListViewRedditPostAdapter extends BaseExpandableListAdapter {
     private void bindChildPostView(View childRowView, int groupPosition, int childPosition) {
         RedditPost redditPost = (RedditPost) this.getChild(groupPosition, childPosition);
         PostViewHolder postViewHolder = (PostViewHolder) childRowView.getTag();
-        postViewHolder.bindContentPostView(context, titleList, colorTitleList, redditPost);
+        postViewHolder.bindContentPostView(redditPost, timeTitleList);
     }
 }

@@ -6,11 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hasbrain.areyouandroiddev.ListViewUtil;
+import com.hasbrain.areyouandroiddev.FormatStringUtil;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,16 +20,12 @@ import java.util.List;
 
 public class ExpandRecyclerViewChildAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
-    private List<Integer> colorTitleList = new ArrayList<Integer>();
-    private List<String> titleList = new ArrayList<String>();
-    private Context context;
     private List<RedditPost> redditPostList;
+    private HashMap<String, String> timeTitleList;
 
     public ExpandRecyclerViewChildAdapter(Context context, List<RedditPost> redditPostList) {
-        this.context = context;
         this.redditPostList = redditPostList;
-        titleList = ListViewUtil.setTitleList(context);
-        colorTitleList = ListViewUtil.setColorTitleList(context);
+        this.timeTitleList = FormatStringUtil.createTimeTitleList(context);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class ExpandRecyclerViewChildAdapter extends RecyclerView.Adapter<PostVie
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         RedditPost redditPost = redditPostList.get(position);
-        holder.bindContentPostView(context, titleList, colorTitleList, redditPost);
+        holder.bindContentPostView(redditPost, timeTitleList);
     }
 
     @Override
