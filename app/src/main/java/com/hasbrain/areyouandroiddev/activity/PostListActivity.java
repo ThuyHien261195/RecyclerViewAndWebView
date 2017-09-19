@@ -18,7 +18,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +36,12 @@ import butterknife.ButterKnife;
 public class PostListActivity extends AppCompatActivity {
 
     public static final String DATA_JSON_FILE_NAME = "data.json";
+    public static final String EXTRA_NAME_GROUP_VIEW_TYPE = "groupViewType";
+    public static final int RECYCLER_VIEW = 0;
+    public static final int LIST_VIEW = 2;
+    public static final int GRID_VIEW = 3;
+    public static final int NUMBER_POST_COLUMN = 3;
+
     private FeedDataStore feedDataStore;
     protected int viewType = 0;
     private RecyclerViewRedditPostAdapter redditPostAdapter;
@@ -92,13 +97,13 @@ public class PostListActivity extends AppCompatActivity {
 
     protected void displayPostList(List<RedditPost> postList) {
         switch (viewType) {
-            case ConstantCollection.RECYCLER_VIEW:
+            case RECYCLER_VIEW:
                 bindDataToRecyclerView(postList);
                 break;
-            case ConstantCollection.LIST_VIEW:
+            case LIST_VIEW:
                 bindDataToListView(postList);
                 break;
-            case ConstantCollection.GRID_VIEW:
+            case GRID_VIEW:
                 bindDataToGridView(postList);
             default:
                 break;
@@ -109,13 +114,13 @@ public class PostListActivity extends AppCompatActivity {
         getViewType();
         int layoutRes = 0;
         switch (viewType) {
-            case ConstantCollection.RECYCLER_VIEW:
+            case RECYCLER_VIEW:
                 layoutRes = R.layout.activity_post_recycler_view;
                 break;
-            case ConstantCollection.LIST_VIEW:
+            case LIST_VIEW:
                 layoutRes = R.layout.activity_post_list_view;
                 break;
-            case ConstantCollection.GRID_VIEW:
+            case GRID_VIEW:
                 layoutRes = R.layout.activity_post_grid_view;
             default:
                 break;
@@ -131,10 +136,10 @@ public class PostListActivity extends AppCompatActivity {
 
     private void setScreenOrientation() {
         switch (viewType) {
-            case ConstantCollection.LIST_VIEW:
+            case LIST_VIEW:
                 this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 break;
-            case ConstantCollection.GRID_VIEW:
+            case GRID_VIEW:
                 this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
             default:
@@ -143,7 +148,7 @@ public class PostListActivity extends AppCompatActivity {
     }
 
     protected void getViewType() {
-        viewType = getIntent().getIntExtra(ConstantCollection.EXTRA_NAME_GROUP_VIEW_TYPE, 0);
+        viewType = getIntent().getIntExtra(EXTRA_NAME_GROUP_VIEW_TYPE, 0);
     }
 
     private void setLayoutPostView() {
@@ -155,16 +160,11 @@ public class PostListActivity extends AppCompatActivity {
                 case Configuration.ORIENTATION_PORTRAIT:
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                     recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
-
-                    layout.setBackgroundColor(ContextCompat.getColor(this,
-                            android.R.color.white));
                     break;
                 case Configuration.ORIENTATION_LANDSCAPE:
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(
+                            this, NUMBER_POST_COLUMN);
                     recyclerViewRedditPost.setLayoutManager(gridLayoutManager);
-
-                    layout.setBackgroundColor(ContextCompat.getColor(this,
-                            R.color.color_landscape_screen_bg));
                     break;
                 default:
                     break;

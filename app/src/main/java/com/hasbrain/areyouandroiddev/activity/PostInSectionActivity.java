@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ExpandableListView;
 
-import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.adapter.ExpandListViewRedditPostAdapter;
 import com.hasbrain.areyouandroiddev.adapter.ExpandRecyclerViewGroupAdapter;
@@ -23,6 +22,8 @@ import butterknife.BindView;
  */
 public class PostInSectionActivity extends PostListActivity {
 
+    public static final int EXPANDABLE_LIST_VIEW = 4;
+    public static final int EXPANDABLE_RECYCLER_VIEW = 5;
     @Nullable
     @BindView(R.id.expandable_lv_reddit_post)
     ExpandableListView expandableListRedditPost;
@@ -38,10 +39,10 @@ public class PostInSectionActivity extends PostListActivity {
                 createRedditPostChildList(groupHeaderList, postList);
 
         switch (viewType) {
-            case ConstantCollection.EXPANDABLE_LIST_VIEW:
+            case EXPANDABLE_LIST_VIEW:
                 bindDataToExpandableListView(groupHeaderList, redditPostChildList);
                 break;
-            case ConstantCollection.EXPANDABLE_RECYCLER_VIEW:
+            case EXPANDABLE_RECYCLER_VIEW:
                 bindDataToExpandableRecyclerView(groupHeaderList, redditPostChildList);
                 break;
             default:
@@ -55,10 +56,10 @@ public class PostInSectionActivity extends PostListActivity {
         getViewType();
         int layoutRes = 0;
         switch (viewType) {
-            case ConstantCollection.EXPANDABLE_LIST_VIEW:
+            case EXPANDABLE_LIST_VIEW:
                 layoutRes = R.layout.activity_post_in_section;
                 break;
-            case ConstantCollection.EXPANDABLE_RECYCLER_VIEW:
+            case EXPANDABLE_RECYCLER_VIEW:
                 layoutRes = R.layout.activity_post_recycler_view;
                 break;
             default:
@@ -94,6 +95,7 @@ public class PostInSectionActivity extends PostListActivity {
 
     private HashMap<String, List<RedditPost>> createRedditPostChildList(
             List<String> groupHeaderList, List<RedditPost> postList) {
+
         HashMap<String, List<RedditPost>> redditPostChildList = new HashMap<>();
         List<RedditPost> stickyPostList = new ArrayList<>();
         List<RedditPost> normalPostList = new ArrayList<>();
