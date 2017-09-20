@@ -157,12 +157,12 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
         for (int i = 0; i < expandRedditPostList.size(); i++) {
             ExpandRedditPost expandRedditPost = expandRedditPostList.get(i);
             if (numItems == position) {
-                return new RedditPostIndex(position, -1);
+                return new RedditPostIndex(i, -1);
             } else if (numItems > position) {
                 int groupIndex = numItems
                         - expandRedditPostList.get(i - 1).getChildRedditPostList().size() - 1;
                 int childIndex = position - groupIndex - 1;
-                return new RedditPostIndex(groupIndex, childIndex);
+                return new RedditPostIndex(i - 1, childIndex);
             }
             if (expandRedditPost.isExpandGroup()) {
                 numItems += expandRedditPost.getChildRedditPostList().size() + 1;
@@ -176,7 +176,7 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
             int groupIndex = numItems
                     - expandRedditPostList.get(lastGroupIndex).getChildRedditPostList().size() - 1;
             int childIndex = position - groupIndex - 1;
-            return new RedditPostIndex(groupIndex, childIndex);
+            return new RedditPostIndex(lastGroupIndex, childIndex);
         }
 
         return null;
