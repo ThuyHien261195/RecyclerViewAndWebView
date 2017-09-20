@@ -48,4 +48,10 @@ public class ChoosePostViewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PostInSectionRecyclerViewActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.button_new_expanable_recycler)
+    public void onClickBtnNewExpandableRecyclerView() {
+        Intent intent = new Intent(this, PostExpandRecylerViewActivity.class);
+        startActivity(intent);
+    }
 }
