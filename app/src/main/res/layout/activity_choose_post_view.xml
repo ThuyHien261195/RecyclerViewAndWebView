@@ -32,4 +32,9 @@
         android:id="@+id/button_expanable_recycler"
         style="@style/CommonButtonTheme"
         android:text="@string/action_expandable_recycler_view" />
+
+    <Button
+        android:id="@+id/button_new_expanable_recycler"
+        style="@style/CommonButtonTheme"
+        android:text="@string/action_new_expandable_recycler_view" />
 </LinearLayout>
