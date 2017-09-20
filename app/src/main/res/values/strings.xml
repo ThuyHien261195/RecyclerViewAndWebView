@@ -9,6 +9,7 @@
     <string name="action_grid_view">Grid View</string>
     <string name="action_expandable_list_view">Expandable List View</string>
     <string name="action_expandable_recycler_view">Expandable Recycler View</string>
+    <string name="action_new_expandable_recycler_view">New Expandable Recycler View</string>
     <string name="title_created_hours">%1$d hours ago</string>
     <string name="title_created_days">%1$d days ago</string>
     <string name="title_created_months">%1$d months ago</string>
