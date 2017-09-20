@@ -21,39 +21,31 @@ public class ChoosePostViewActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_recycler_view)
     public void onClickBtnViewByRecyclerView() {
-        Intent intent = new Intent(this, PostListActivity.class);
+        Intent intent = new Intent(this, PostRecyclerViewActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.button_list_view)
     public void onClickBtnViewByListView() {
-        Intent intent = new Intent(this, PostListActivity.class);
-        intent.putExtra(PostListActivity.EXTRA_NAME_GROUP_VIEW_TYPE,
-                PostListActivity.LIST_VIEW);
+        Intent intent = new Intent(this, PostListViewActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.button_grid_view)
     public void onClickBtnViewByGridView() {
-        Intent intent = new Intent(this, PostListActivity.class);
-        intent.putExtra(PostListActivity.EXTRA_NAME_GROUP_VIEW_TYPE,
-                PostListActivity.GRID_VIEW);
+        Intent intent = new Intent(this, PostGridViewActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.button_expandable_list)
     public void onClickBtnExpandableListView() {
-        Intent intent = new Intent(this, PostInSectionActivity.class);
-        intent.putExtra(PostListActivity.EXTRA_NAME_GROUP_VIEW_TYPE,
-                PostInSectionActivity.EXPANDABLE_LIST_VIEW);
+        Intent intent = new Intent(this, PostInSectionListViewActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.button_expanable_recycler)
     public void onClickBtnExpandableRecyclerView() {
-        Intent intent = new Intent(this, PostInSectionActivity.class);
-        intent.putExtra(PostListActivity.EXTRA_NAME_GROUP_VIEW_TYPE,
-                PostInSectionActivity.EXPANDABLE_RECYCLER_VIEW);
+        Intent intent = new Intent(this, PostInSectionRecyclerViewActivity.class);
         startActivity(intent);
     }
 }

@@ -20,7 +20,7 @@ import butterknife.BindView;
 /**
  * Created by Jupiter (vu.cao.duy@gmail.com) on 10/9/15.
  */
-public class PostInSectionActivity extends PostListActivity {
+public class PostInSectionActivity extends PostRecyclerViewActivity {
 
     public static final int EXPANDABLE_LIST_VIEW = 4;
     public static final int EXPANDABLE_RECYCLER_VIEW = 5;
