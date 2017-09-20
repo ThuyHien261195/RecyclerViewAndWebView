@@ -40,7 +40,7 @@ public class ExpandRVGroupViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void bindGroupHeaderView(
+    protected void bindGroupHeaderView(
             Context context, String groupHeader, List<RedditPost> redditPostList) {
         textViewGroupHeader.setText(groupHeader);
 

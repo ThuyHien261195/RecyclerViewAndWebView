@@ -29,9 +29,6 @@ import butterknife.ButterKnife;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.linear_layout_reddit_post)
-    LinearLayout linearLayoutRedditPost;
-
     @BindView(R.id.text_score)
     TextView textViewScore;
 
@@ -74,7 +71,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void bindContentPostView(final RedditPost redditPost, HashMap<String, String> timeTitleList) {
+    protected void bindContentPostView(final RedditPost redditPost, HashMap<String, String> timeTitleList) {
         this.post = redditPost;
         String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), timeTitleList);
         textViewScore.setText(String.valueOf(redditPost.getScore()));

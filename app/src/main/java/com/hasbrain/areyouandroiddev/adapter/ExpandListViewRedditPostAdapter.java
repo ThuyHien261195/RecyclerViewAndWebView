@@ -20,14 +20,12 @@ import java.util.List;
 
 public class ExpandListViewRedditPostAdapter extends BaseExpandableListAdapter {
 
-    private Context context;
     private List<String> postGroupHeaderList;
     private HashMap<String, List<RedditPost>> postDataChildList;
     private HashMap<String, String> timeTitleList;
 
     public ExpandListViewRedditPostAdapter(Context context, List<String> postGroupHeader,
                                            HashMap<String, List<RedditPost>> postDataChildList) {
-        this.context = context;
         this.postGroupHeaderList = postGroupHeader;
         this.postDataChildList = postDataChildList;
         this.timeTitleList = FormatStringUtil.createTimeTitleList(context);

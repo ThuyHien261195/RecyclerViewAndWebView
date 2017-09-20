@@ -88,10 +88,10 @@ public class ExpandRecyclerViewGroupAdapter extends RecyclerView.Adapter<Recycle
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent postViewIntent = new Intent(context, PostViewActivity.class);
+                Intent postViewIntent = new Intent(v.getContext(), PostViewActivity.class);
                 postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL,
                         ConstantCollection.EXTRA_VALUE_MORE_INFO_URL);
-                context.startActivity(postViewIntent);
+                v.getContext().startActivity(postViewIntent);
             }
         });
     }
