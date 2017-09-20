@@ -38,7 +38,7 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowView = null;
+        View rowView;
         switch (viewType) {
             case CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())

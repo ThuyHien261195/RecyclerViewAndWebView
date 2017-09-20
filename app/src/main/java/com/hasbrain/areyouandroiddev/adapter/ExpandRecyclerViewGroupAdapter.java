@@ -46,7 +46,7 @@ public class ExpandRecyclerViewGroupAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowView = null;
+        View rowView;
         switch (viewType) {
             case CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
