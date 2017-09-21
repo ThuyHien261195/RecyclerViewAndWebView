@@ -48,6 +48,6 @@ public class ExpandNewGroupGVHolder extends RecyclerView.ViewHolder implements V
     }
 
     public interface OnGroupHeaderListener {
-        public void onGroupItemClick(int position, int groupIndex);
+        void onGroupItemClick(int position, int groupIndex);
     }
 }

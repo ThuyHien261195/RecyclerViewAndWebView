@@ -93,7 +93,6 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public int getItemViewType(int position) {
         int count = getItemCount() - 1;
-        int expandRedditPostItemId = 0;
         if (position == count) {
             return FOOTER_VIEW;
         }
