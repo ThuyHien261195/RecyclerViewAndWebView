@@ -116,11 +116,9 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public int getItemCount() {
         // ExpandRedditPostList + 1 for Footer View
-        int count = expandRedditPostList.size() + 1;
-        for (ExpandRedditPost expandRedditPost : expandRedditPostList) {
-            if (expandRedditPost.isExpandGroup()) {
-                count += expandRedditPost.getChildRedditPostList().size();
-            }
+        int count = 1;
+        for (int i = 0; i < expandRedditPostList.size(); i++) {
+            count += getNumberOfItemInGroup(i);
         }
         return count;
     }
@@ -137,6 +135,14 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
+    private int getNumberOfItemInGroup(int i) {
+        ExpandRedditPost expandRedditPost = expandRedditPostList.get(i);
+        if (expandRedditPost.isExpandGroup()) {
+            return expandRedditPostList.get(i).getChildRedditPostList().size() + 1;
+        }
+        return 1;
+    }
+
     private void setOnClickFooterView(View rowView) {
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,33 +157,25 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
 
     private RedditPostIndex getRealPositionInList(int position) {
         int numItems = 0;
-        int count = getItemCount() - 1;
 
         for (int i = 0; i < expandRedditPostList.size(); i++) {
-            ExpandRedditPost expandRedditPost = expandRedditPostList.get(i);
             if (numItems == position) {
                 return new RedditPostIndex(i, -1);
-            } else if (numItems > position) {
-                int groupIndex = numItems
-                        - expandRedditPostList.get(i - 1).getChildRedditPostList().size() - 1;
-                int childIndex = position - groupIndex - 1;
-                return new RedditPostIndex(i - 1, childIndex);
             }
-            if (expandRedditPost.isExpandGroup()) {
-                numItems += expandRedditPost.getChildRedditPostList().size() + 1;
-            } else {
-                numItems++;
+
+            numItems += getNumberOfItemInGroup(i);
+
+            if (numItems > position) {
+                int childIndex = getChildIndex(numItems, position, i);
+                return new RedditPostIndex(i, childIndex);
             }
         }
-
-        if (numItems > position) {
-            int lastGroupIndex = expandRedditPostList.size() - 1;
-            int groupIndex = numItems
-                    - expandRedditPostList.get(lastGroupIndex).getChildRedditPostList().size() - 1;
-            int childIndex = position - groupIndex - 1;
-            return new RedditPostIndex(lastGroupIndex, childIndex);
-        }
-
         return null;
+    }
+
+    private int getChildIndex(int numItems, int position, int groupIndex) {
+        int expandGroupIndex = numItems
+                - expandRedditPostList.get(groupIndex).getChildRedditPostList().size() - 1;
+        return position - expandGroupIndex - 1;
     }
 }
