@@ -53,7 +53,6 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
             case FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_footer, parent, false);
-                setOnClickFooterView(rowView);
                 return new FooterViewHolder(rowView);
             default:
                 break;
@@ -98,17 +97,13 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
         }
 
         int numItems = 0;
-        for (ExpandRedditPost expandRedditPost : expandRedditPostList) {
+        for (int i = 0; i < expandRedditPostList.size(); i++) {
             if (numItems == position) {
                 return GROUP_VIEW;
             } else if (numItems > position) {
                 return CHILD_CONTENT_VIEW;
             }
-            if (expandRedditPost.isExpandGroup()) {
-                numItems += expandRedditPost.getChildRedditPostList().size() + 1;
-            } else {
-                numItems++;
-            }
+            numItems += getVisibleNumberOfItemInGroup(i);
         }
         return CHILD_CONTENT_VIEW;
     }
@@ -118,7 +113,7 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
         // ExpandRedditPostList + 1 for Footer View
         int count = 1;
         for (int i = 0; i < expandRedditPostList.size(); i++) {
-            count += getNumberOfItemInGroup(i);
+            count += getVisibleNumberOfItemInGroup(i);
         }
         return count;
     }
@@ -135,24 +130,12 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
-    private int getNumberOfItemInGroup(int i) {
+    private int getVisibleNumberOfItemInGroup(int i) {
         ExpandRedditPost expandRedditPost = expandRedditPostList.get(i);
         if (expandRedditPost.isExpandGroup()) {
             return expandRedditPostList.get(i).getChildRedditPostList().size() + 1;
         }
         return 1;
-    }
-
-    private void setOnClickFooterView(View rowView) {
-        rowView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PostViewActivity.class);
-                intent.putExtra(ConstantCollection.EXTRA_NAME_URL,
-                        ConstantCollection.EXTRA_VALUE_MORE_INFO_URL);
-                v.getContext().startActivity(intent);
-            }
-        });
     }
 
     private RedditPostIndex getRealPositionInList(int position) {
@@ -163,7 +146,7 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
                 return new RedditPostIndex(i, -1);
             }
 
-            numItems += getNumberOfItemInGroup(i);
+            numItems += getVisibleNumberOfItemInGroup(i);
 
             if (numItems > position) {
                 int childIndex = getChildIndex(numItems, position, i);

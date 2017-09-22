@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/text_score"
-        android:textColor="@color/color_landscape_author_title" />
+        android:textColor="@color/color_author_title" />
 
     <TextView
         android:id="@id/text_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:textColor="@color/color_landscape_post_title"
+        android:textColor="@color/color_post_title"
         android:textSize="@dimen/score_text_size" />
 
     <TextView
@@ -37,6 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/color_landscape_post_title"
+        android:textColor="@color/color_post_title"
         android:textSize="@dimen/title_comment_text_size" />
 </RelativeLayout>
