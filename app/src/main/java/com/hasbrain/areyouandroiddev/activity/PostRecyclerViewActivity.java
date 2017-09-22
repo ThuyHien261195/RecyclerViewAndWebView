@@ -96,7 +96,6 @@ public class PostRecyclerViewActivity extends AppCompatActivity {
 
     private void setLayoutPostView() {
         int orientation = getResources().getConfiguration().orientation;
-        View layout = findViewById(R.id.layout_landscape_reddit_post);
 
         if (recyclerViewRedditPost != null) {
             switch (orientation) {
