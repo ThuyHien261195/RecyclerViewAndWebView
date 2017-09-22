@@ -1,16 +1,13 @@
 package com.hasbrain.areyouandroiddev.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hasbrain.areyouandroiddev.ConstantCollection;
 import com.hasbrain.areyouandroiddev.FormatStringUtil;
 import com.hasbrain.areyouandroiddev.R;
-import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.model.ExpandRedditPost;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 import com.hasbrain.areyouandroiddev.model.RedditPostIndex;
@@ -22,8 +19,8 @@ import java.util.List;
  * Created by thuyhien on 9/20/17.
  */
 
-public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-        implements ExpandNewGroupGVHolder.OnGroupHeaderListener {
+public class ExpandNewRVPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+        implements ExpandNewGroupRVHolder.OnGroupHeaderListener {
 
     public static final int GROUP_VIEW = 0;
     public static final int CHILD_CONTENT_VIEW = 1;
@@ -32,7 +29,7 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
     private List<ExpandRedditPost> expandRedditPostList;
     private HashMap<String, String> timeTitleList;
 
-    public ExpandRecyclerViewPostAdapter(Context context, List<ExpandRedditPost> expandRedditPostList) {
+    public ExpandNewRVPostAdapter(Context context, List<ExpandRedditPost> expandRedditPostList) {
         this.expandRedditPostList = expandRedditPostList;
         timeTitleList = FormatStringUtil.createTimeTitleList(context);
     }
@@ -44,8 +41,8 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
             case GROUP_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_card_view_group, parent, false);
-                return new ExpandNewGroupGVHolder(
-                        (ExpandNewGroupGVHolder.OnGroupHeaderListener) this, rowView);
+                return new ExpandNewGroupRVHolder(
+                        (ExpandNewGroupRVHolder.OnGroupHeaderListener) this, rowView);
             case CHILD_CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_card_view_post, parent, false);
@@ -74,7 +71,7 @@ public class ExpandRecyclerViewPostAdapter extends RecyclerView.Adapter<Recycler
             case GROUP_VIEW:
                 String header = expandRedditPostList.get(
                         redditPostIndex.getGroupIndex()).getGroupHeader();
-                ((ExpandNewGroupGVHolder) holder).bindGroupView(header, redditPostIndex.getGroupIndex());
+                ((ExpandNewGroupRVHolder) holder).bindGroupView(header, redditPostIndex.getGroupIndex());
                 break;
             case CHILD_CONTENT_VIEW:
                 ExpandRedditPost expandRedditPost = expandRedditPostList.get(redditPostIndex.getGroupIndex());

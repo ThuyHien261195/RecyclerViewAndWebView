@@ -16,7 +16,6 @@ import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.activity.PostViewActivity;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -93,7 +92,7 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
 
     private View getContentView(@NonNull ViewGroup parent, View rowView) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        rowView = inflater.inflate(R.layout.item_grid_view_post, parent, false);
+        rowView = inflater.inflate(R.layout.item_list_view_post, parent, false);
         PostViewHolder postViewHolder = new PostViewHolder(rowView);
         rowView.setTag(postViewHolder);
         return rowView;

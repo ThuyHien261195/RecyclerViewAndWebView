@@ -18,7 +18,7 @@ import butterknife.OnClick;
  * Created by thuyhien on 9/20/17.
  */
 
-public class ExpandNewGroupGVHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ExpandNewGroupRVHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     @BindView(R.id.text_group_header)
     TextView textViewGroupHeader;
@@ -26,7 +26,7 @@ public class ExpandNewGroupGVHolder extends RecyclerView.ViewHolder implements V
     private int groupIndex;
     private OnGroupHeaderListener onGroupHeaderListener;
 
-    ExpandNewGroupGVHolder(final OnGroupHeaderListener onGroupHeaderListener, View view) {
+    ExpandNewGroupRVHolder(final OnGroupHeaderListener onGroupHeaderListener, View view) {
         super(view);
         ButterKnife.bind(this, view);
 
