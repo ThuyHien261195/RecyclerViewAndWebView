@@ -17,4 +17,8 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_marginTop">@dimen/btn_common_vertical_margin</item>
     </style>
+
+    <style name="PostHeightTheme">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>
