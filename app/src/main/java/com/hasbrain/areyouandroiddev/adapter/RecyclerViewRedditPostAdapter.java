@@ -48,7 +48,6 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
             case FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_footer, parent, false);
-                setOnClickFooterView(rowView);
                 return new FooterViewHolder(rowView);
             default:
                 break;
@@ -94,17 +93,5 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
         } else {
             return CONTENT_VIEW;
         }
-    }
-
-    private void setOnClickFooterView(final View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent postViewIntent = new Intent(view.getContext(), PostViewActivity.class);
-                postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL,
-                        ConstantCollection.EXTRA_VALUE_MORE_INFO_URL);
-                view.getContext().startActivity(postViewIntent);
-            }
-        });
     }
 }

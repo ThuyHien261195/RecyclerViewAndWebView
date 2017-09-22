@@ -55,7 +55,6 @@ public class ExpandRecyclerViewGroupAdapter extends RecyclerView.Adapter<Recycle
             case FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_footer, parent, false);
-                setOnClickFooterView(rowView);
                 return new FooterViewHolder(rowView);
             default:
                 break;
@@ -82,17 +81,5 @@ public class ExpandRecyclerViewGroupAdapter extends RecyclerView.Adapter<Recycle
     @Override
     public int getItemCount() {
         return postGroupHeaderList.size() + 1;
-    }
-
-    private void setOnClickFooterView(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent postViewIntent = new Intent(v.getContext(), PostViewActivity.class);
-                postViewIntent.putExtra(ConstantCollection.EXTRA_NAME_URL,
-                        ConstantCollection.EXTRA_VALUE_MORE_INFO_URL);
-                v.getContext().startActivity(postViewIntent);
-            }
-        });
     }
 }
