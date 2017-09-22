@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/PostHeightTheme"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_post_landscape_height"
     android:layout_margin="@dimen/item_post_margin"
+    app:cardBackgroundColor="@color/color_item_bg"
     app:cardCornerRadius="@dimen/item_post_radius"
-    app:contentPadding="@dimen/item_post_spacing"
-    app:cardBackgroundColor="@color/color_item_bg">
+    app:contentPadding="@dimen/item_post_spacing">
 
     <LinearLayout
         android:id="@+id/linear_layout_reddit_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/text_author"
                 android:layout_width="0dp"
