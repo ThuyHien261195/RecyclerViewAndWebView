@@ -8,8 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hasbrain.areyouandroiddev.R;
-import com.hasbrain.areyouandroiddev.adapter.ExpandRecyclerViewGroupAdapter;
-import com.hasbrain.areyouandroiddev.adapter.ExpandRecyclerViewPostAdapter;
+import com.hasbrain.areyouandroiddev.adapter.ExpandNewRVPostAdapter;
 import com.hasbrain.areyouandroiddev.datastore.FeedDataStore;
 import com.hasbrain.areyouandroiddev.datastore.FileBasedFeedDataStore;
 import com.hasbrain.areyouandroiddev.model.ExpandRedditPost;
@@ -19,7 +18,6 @@ import com.hasbrain.areyouandroiddev.model.RedditPostConverter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -85,8 +83,8 @@ public class PostExpandRecylerViewActivity extends AppCompatActivity {
     private void bindDataToExpandableRecyclerView(List<ExpandRedditPost> expandRedditPostList) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         expandableRecyclerViewPost.setLayoutManager(linearLayoutManager);
-        ExpandRecyclerViewPostAdapter redditPostAdapter =
-                new ExpandRecyclerViewPostAdapter(this, expandRedditPostList);
+        ExpandNewRVPostAdapter redditPostAdapter =
+                new ExpandNewRVPostAdapter(this, expandRedditPostList);
         expandableRecyclerViewPost.setAdapter(redditPostAdapter);
     }
 
