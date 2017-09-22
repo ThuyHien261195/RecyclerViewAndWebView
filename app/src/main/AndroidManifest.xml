@@ -21,7 +21,8 @@
         <activity
             android:name=".activity.PostRecyclerViewActivity"
             android:configChanges="orientation" />
-        <activity android:name=".activity.PostListViewActivity" />
+        <activity android:name=".activity.PostListViewActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.PostGridViewActivity" />
         <activity android:name=".activity.PostInSectionRecyclerViewActivity" />
         <activity android:name=".activity.PostInSectionListViewActivity" />
