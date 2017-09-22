@@ -136,25 +136,25 @@ public class ExpandNewRVPostAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private RedditPostIndex getRealPositionInList(int position) {
-        int numItems = 0;
+        int visibleNumberItems = 0;
 
         for (int i = 0; i < expandRedditPostList.size(); i++) {
-            if (numItems == position) {
+            if (visibleNumberItems == position) {
                 return new RedditPostIndex(i, -1);
             }
 
-            numItems += getVisibleNumberOfItemInGroup(i);
+            visibleNumberItems += getVisibleNumberOfItemInGroup(i);
 
-            if (numItems > position) {
-                int childIndex = getChildIndex(numItems, position, i);
+            if (visibleNumberItems > position) {
+                int childIndex = getChildIndex(visibleNumberItems, position, i);
                 return new RedditPostIndex(i, childIndex);
             }
         }
         return null;
     }
 
-    private int getChildIndex(int numItems, int position, int groupIndex) {
-        int expandGroupIndex = numItems
+    private int getChildIndex(int currentPos, int position, int groupIndex) {
+        int expandGroupIndex = currentPos
                 - expandRedditPostList.get(groupIndex).getChildRedditPostList().size() - 1;
         return position - expandGroupIndex - 1;
     }

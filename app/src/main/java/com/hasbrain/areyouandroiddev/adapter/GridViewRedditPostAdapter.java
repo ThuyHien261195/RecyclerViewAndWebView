@@ -74,6 +74,7 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
                 case FOOTER_VIEW:
                     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
                     rowView = inflater.inflate(R.layout.item_footer, parent, false);
+                    onClickFooterViewItem(rowView);
                     break;
                 default:
                     break;
@@ -134,6 +135,17 @@ public class GridViewRedditPostAdapter extends ArrayAdapter<RedditPost> {
                 }
             });
         }
+    }
+
+    private void onClickFooterViewItem(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PostViewActivity.class);
+                intent.putExtra(ConstantCollection.EXTRA_NAME_URL, ConstantCollection.EXTRA_VALUE_MORE_INFO_URL);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     static class PostViewHolder {
