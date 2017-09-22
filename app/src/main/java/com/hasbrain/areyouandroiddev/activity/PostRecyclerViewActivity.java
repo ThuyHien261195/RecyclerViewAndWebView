@@ -88,12 +88,6 @@ public class PostRecyclerViewActivity extends AppCompatActivity {
         return R.layout.activity_post_recycler_view;
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setLayoutPostView();
-    }
-
     private void setLayoutPostView() {
         int orientation = getResources().getConfiguration().orientation;
 
