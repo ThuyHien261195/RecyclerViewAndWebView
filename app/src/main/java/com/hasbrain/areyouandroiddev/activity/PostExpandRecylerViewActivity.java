@@ -88,18 +88,10 @@ public class PostExpandRecylerViewActivity extends AppCompatActivity {
         expandableRecyclerViewPost.setAdapter(redditPostAdapter);
     }
 
-    private List<String> createGroupHeaderList() {
-        List<String> groupHeaderList = new ArrayList<>();
-        groupHeaderList.add(getResources().getString(R.string.title_sticky_posts));
-        groupHeaderList.add(getResources().getString(R.string.title_normal_posts));
-        return groupHeaderList;
-    }
-
     private List<ExpandRedditPost> createExpandRedditPostList(List<RedditPost> postList) {
 
         List<ExpandRedditPost> expandRedditPostList = new ArrayList<>();
 
-        List<String> groupHeaderList = createGroupHeaderList();
         List<RedditPost> stickyPostList = new ArrayList<>();
         List<RedditPost> normalPostList = new ArrayList<>();
 
@@ -112,8 +104,10 @@ public class PostExpandRecylerViewActivity extends AppCompatActivity {
             }
         }
 
-        expandRedditPostList.add(new ExpandRedditPost(groupHeaderList.get(0), stickyPostList));
-        expandRedditPostList.add(new ExpandRedditPost(groupHeaderList.get(1), normalPostList));
+        expandRedditPostList.add(new ExpandRedditPost(
+                getResources().getString(R.string.title_sticky_posts), stickyPostList));
+        expandRedditPostList.add(new ExpandRedditPost(
+                getResources().getString(R.string.title_normal_posts), normalPostList));
         return expandRedditPostList;
     }
 }
