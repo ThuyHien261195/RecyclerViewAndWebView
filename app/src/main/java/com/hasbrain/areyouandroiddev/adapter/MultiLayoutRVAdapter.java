@@ -120,7 +120,7 @@ public class MultiLayoutRVAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        // 1 for Title Normal Post and 1 for Footer View.
+        // Title Normal Post, Reycler View of normal post list and Footer View.
         int itemCount = 3;
 
         int stickyInGroupListPos = getPositionOfGroupList(stickyHeaderTitle);
