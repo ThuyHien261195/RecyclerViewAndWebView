@@ -3,6 +3,7 @@ package com.hasbrain.areyouandroiddev.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.hasbrain.areyouandroiddev.R;
 
@@ -53,5 +54,15 @@ public class ChoosePostViewActivity extends AppCompatActivity {
     public void onClickBtnNewExpandableRecyclerView() {
         Intent intent = new Intent(this, PostExpandRecylerViewActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.button_multi_layout_recycler)
+    public void onClickBtnMultiLayoutRecyclerView() {
+        Intent intent = new Intent(this, PostMultiLayoutRVActivity.class);
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.d("Error", e.toString());
+        }
     }
 }

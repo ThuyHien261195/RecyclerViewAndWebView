@@ -26,6 +26,7 @@
         <activity android:name=".activity.PostInSectionRecyclerViewActivity" />
         <activity android:name=".activity.PostInSectionListViewActivity" />
         <activity android:name=".activity.PostExpandRecylerViewActivity" />
+        <activity android:name=".activity.PostMultiLayoutRVActivity" />
     </application>
 
 </manifest>
