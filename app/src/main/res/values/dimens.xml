@@ -38,4 +38,11 @@
     <dimen name="gv_vertical_spacing">10dp</dimen>
     <item name="item_post_height" type="dimen">-2</item>
     <item name="linear_layout_reddit_post" type="id"/>
+
+    <!-- Multi layout's normal post properties -->
+    <dimen name="item_normal_post_width">150dp</dimen>
+    <dimen name="item_normal_post_heihgt">150dp</dimen>
+    <dimen name="title_normal_author_text_size">14sp</dimen>
+    <dimen name="title_normal_score_text_size">18sp</dimen>
+    <dimen name="title_normal_post_text_size">16sp</dimen>
 </resources>
