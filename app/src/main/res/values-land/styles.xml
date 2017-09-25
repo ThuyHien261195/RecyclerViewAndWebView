@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="PostHeightTheme">
-        <item name="android:layout_height">@dimen/item_post_height</item>
-    </style>
-</resources>
