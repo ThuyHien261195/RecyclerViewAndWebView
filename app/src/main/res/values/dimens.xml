@@ -15,9 +15,9 @@
     <dimen name="text_view_vertical_spacing">5dp</dimen>
 
     <!-- Item post properties. -->
-    <dimen name="item_post_height">150dp</dimen>
+    <!--<dimen name="item_post_height">150dp</dimen>-->
     <dimen name="item_post_margin">5dp</dimen>
-    <dimen name="item_post_spacing">10dp</dimen>
+    <dimen name="item_post_padding">10dp</dimen>
     <dimen name="item_footer_vertical_padding">15dp</dimen>
     <dimen name="item_post_radius">4dp</dimen>
     <dimen name="item_post_border">0.5dp</dimen>
@@ -36,4 +36,6 @@
     <!-- Grid view properties. -->
     <dimen name="grid_view_column_width">180dp</dimen>
     <dimen name="gv_vertical_spacing">10dp</dimen>
+    <item name="item_post_height" type="dimen">-2</item>
+    <item name="linear_layout_reddit_post" type="id"/>
 </resources>

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/item_post_margin"
     app:cardCornerRadius="@dimen/item_post_radius"
-    app:contentPadding="@dimen/item_post_spacing">
+    app:contentPadding="@dimen/item_post_padding">
 
     <TextView
         android:id="@+id/text_group_header"

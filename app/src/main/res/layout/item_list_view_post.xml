@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/PostHeightTheme"
     android:layout_width="match_parent"
+    android:layout_height="@dimen/item_post_height"
     android:background="@drawable/ls_item_post_bg"
     android:orientation="vertical"
-    android:padding="@dimen/item_post_spacing">
+    android:padding="@dimen/item_post_padding">
 
     <LinearLayout
         android:id="@+id/linear_layout_reddit_post"

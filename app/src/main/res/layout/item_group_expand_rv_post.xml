@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/item_post_spacing"
+    android:paddingBottom="@dimen/item_post_padding"
     android:paddingTop="@dimen/item_group_spacing">
 
     <TextView
