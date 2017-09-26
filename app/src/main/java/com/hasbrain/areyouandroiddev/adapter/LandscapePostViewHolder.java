@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ import java.util.List;
 
 public class LandscapePostViewHolder extends PostViewHolder {
 
-    public LandscapePostViewHolder(View view) {
-        super(view);
+    public LandscapePostViewHolder(View view, HashMap<String, String> timeTitleList) {
+        super(view, timeTitleList);
     }
 
     @Override

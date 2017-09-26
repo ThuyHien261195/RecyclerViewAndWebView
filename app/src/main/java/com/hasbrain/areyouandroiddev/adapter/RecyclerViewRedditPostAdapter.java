@@ -57,9 +57,9 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
 
     private PostViewHolder createContentViewHolder(View rowView) {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            return new PostViewHolder(rowView);
+            return new PostViewHolder(rowView, timeTitleList);
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            return new LandscapePostViewHolder(rowView);
+            return new LandscapePostViewHolder(rowView, timeTitleList);
         }
 
         return null;
@@ -67,11 +67,10 @@ public class RecyclerViewRedditPostAdapter extends RecyclerView.Adapter<Recycler
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        int viewType = getItemViewType(position);
+        int viewType = holder.getItemViewType();
         switch (viewType) {
             case CONTENT_VIEW:
-                ((PostViewHolder) holder).bindContentPostView(
-                        redditPostList.get(position), timeTitleList);
+                ((PostViewHolder) holder).bindContentPostView(redditPostList.get(position));
                 break;
             case FOOTER_VIEW:
                 break;

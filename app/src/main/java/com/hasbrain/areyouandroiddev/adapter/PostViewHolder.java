@@ -56,11 +56,15 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     @BindColor(R.color.color_normal_post)
     int normalColor;
 
+    private HashMap<String, String> timeTitleList;
     protected RedditPost post;
 
-    PostViewHolder(View view) {
+    PostViewHolder(View view, HashMap<String, String> timeTitleList) {
         super(view);
         ButterKnife.bind(this, view);
+
+        this.timeTitleList = timeTitleList;
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +75,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    protected void bindContentPostView(final RedditPost redditPost, HashMap<String, String> timeTitleList) {
+    protected void bindContentPostView(final RedditPost redditPost) {
         this.post = redditPost;
         String postTime = FormatStringUtil.getPostTime(redditPost.getCreatedUTC(), timeTitleList);
         textViewScore.setText(String.valueOf(redditPost.getScore()));
