@@ -32,6 +32,9 @@ public class PostMultiLayoutRVActivity extends AppCompatActivity {
     public static final String DATA_JSON_FILE_NAME = "data.json";
     private FeedDataStore feedDataStore;
 
+    private ExpandRedditPost expandStickyPostList;
+    private ExpandRedditPost expandNormalPostList;
+
     @BindView(R.id.recycler_view_reddit_post)
     RecyclerView recyclerViewRedditPost;
 
@@ -72,26 +75,23 @@ public class PostMultiLayoutRVActivity extends AppCompatActivity {
     }
 
     protected void displayPostList(List<RedditPost> postList) {
-        List<ExpandRedditPost> expandRedditPostList = createExpandRedditPostList(postList);
-        bindDataToRecyclerView(expandRedditPostList);
+        createExpandRedditPostList(postList);
+        bindDataToRecyclerView();
     }
 
     protected int getLayoutResource() {
         return R.layout.activity_post_recycler_view;
     }
 
-    private void bindDataToRecyclerView(List<ExpandRedditPost> expandRedditPostList) {
+    private void bindDataToRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewRedditPost.setLayoutManager(linearLayoutManager);
         MultiLayoutRVAdapter multiLayoutRVAdapter =
-                new MultiLayoutRVAdapter(this, expandRedditPostList);
+                new MultiLayoutRVAdapter(this, expandStickyPostList, expandNormalPostList);
         recyclerViewRedditPost.setAdapter(multiLayoutRVAdapter);
     }
 
-    private List<ExpandRedditPost> createExpandRedditPostList(List<RedditPost> postList) {
-
-        List<ExpandRedditPost> expandRedditPostList = new ArrayList<>();
-
+    private void createExpandRedditPostList(List<RedditPost> postList) {
         List<RedditPost> stickyPostList = new ArrayList<>();
         List<RedditPost> normalPostList = new ArrayList<>();
 
@@ -104,10 +104,9 @@ public class PostMultiLayoutRVActivity extends AppCompatActivity {
             }
         }
 
-        expandRedditPostList.add(new ExpandRedditPost(
-                getResources().getString(R.string.title_sticky_posts), stickyPostList));
-        expandRedditPostList.add(new ExpandRedditPost(
-                getResources().getString(R.string.title_normal_posts), normalPostList));
-        return expandRedditPostList;
+        expandStickyPostList =
+                new ExpandRedditPost(getString(R.string.title_sticky_posts), stickyPostList);
+        expandNormalPostList =
+                new ExpandRedditPost(getString(R.string.title_normal_posts), normalPostList);
     }
 }
