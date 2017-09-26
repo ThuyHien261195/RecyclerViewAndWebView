@@ -32,13 +32,13 @@ public class MultiLayoutNormalPostAdapter extends RecyclerView.Adapter<PostViewH
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_card_view_normal_post, parent, false);
-        return new PostViewHolder(rowView);
+        return new PostViewHolder(rowView, timeTitleList);
     }
 
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         RedditPost redditPost = redditPostList.get(position);
-        holder.bindContentPostView(redditPost, timeTitleList);
+        holder.bindContentPostView(redditPost);
     }
 
     @Override

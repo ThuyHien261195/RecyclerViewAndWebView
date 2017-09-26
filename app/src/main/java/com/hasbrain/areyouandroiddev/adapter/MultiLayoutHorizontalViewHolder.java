@@ -20,21 +20,23 @@ import butterknife.ButterKnife;
 
 public class MultiLayoutHorizontalViewHolder extends RecyclerView.ViewHolder {
 
+    private final HashMap<String, String> timeTitleList;
     @BindView(R.id.recycler_view_reddit_post)
     RecyclerView horizontalRecyclerViewRedditPost;
 
-    public MultiLayoutHorizontalViewHolder(View itemView) {
+    public MultiLayoutHorizontalViewHolder(View itemView, HashMap<String, String> timeTitleList) {
         super(itemView);
+        this.timeTitleList = timeTitleList;
         ButterKnife.bind(this, itemView);
+
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        horizontalRecyclerViewRedditPost.setLayoutManager(linearLayoutManager);
     }
 
-    public void bindHorizontalPostView(Context context,
-                                       List<RedditPost> redditPostList,
-                                       HashMap<String, String> timeTitleList) {
-        MultiLayoutNormalPostAdapter childAdapter = new MultiLayoutNormalPostAdapter(redditPostList, timeTitleList);
-        LinearLayoutManager linearLayoutManager =
-                new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        horizontalRecyclerViewRedditPost.setLayoutManager(linearLayoutManager);
+    public void bindHorizontalPostView(List<RedditPost> redditPostList) {
+        MultiLayoutNormalPostAdapter childAdapter =
+                new MultiLayoutNormalPostAdapter(redditPostList, timeTitleList);
         horizontalRecyclerViewRedditPost.setAdapter(childAdapter);
     }
 }
