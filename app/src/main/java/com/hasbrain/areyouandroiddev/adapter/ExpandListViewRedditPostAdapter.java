@@ -88,7 +88,7 @@ public class ExpandListViewRedditPostAdapter extends BaseExpandableListAdapter {
         if (childRowView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             childRowView = inflater.inflate(R.layout.item_list_view_post, parent, false);
-            PostViewHolder postViewHolder = new PostViewHolder(childRowView);
+            PostViewHolder postViewHolder = new PostViewHolder(childRowView, timeTitleList);
             childRowView.setTag(postViewHolder);
         }
 
@@ -109,6 +109,6 @@ public class ExpandListViewRedditPostAdapter extends BaseExpandableListAdapter {
     private void bindChildPostView(View childRowView, int groupPosition, int childPosition) {
         RedditPost redditPost = (RedditPost) this.getChild(groupPosition, childPosition);
         PostViewHolder postViewHolder = (PostViewHolder) childRowView.getTag();
-        postViewHolder.bindContentPostView(redditPost, timeTitleList);
+        postViewHolder.bindContentPostView(redditPost);
     }
 }

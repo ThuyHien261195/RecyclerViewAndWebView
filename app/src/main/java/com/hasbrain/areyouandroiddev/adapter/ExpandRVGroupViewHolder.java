@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.hasbrain.areyouandroiddev.R;
 import com.hasbrain.areyouandroiddev.model.RedditPost;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,10 +29,17 @@ public class ExpandRVGroupViewHolder extends RecyclerView.ViewHolder {
     RecyclerView recyclerViewPostChild;
 
     private boolean isExpandChildPostList = false;
+    private HashMap<String, String> timeTitleList;
 
-    ExpandRVGroupViewHolder(View view) {
+    ExpandRVGroupViewHolder(View view, HashMap<String, String> timeTitleList) {
         super(view);
         ButterKnife.bind(this, view);
+
+        this.timeTitleList = timeTitleList;
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+        recyclerViewPostChild.setLayoutManager(linearLayoutManager);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,14 +48,10 @@ public class ExpandRVGroupViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    protected void bindGroupHeaderView(
-            Context context, String groupHeader, List<RedditPost> redditPostList) {
+    protected void bindGroupHeaderView(String groupHeader, List<RedditPost> redditPostList) {
         textViewGroupHeader.setText(groupHeader);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        recyclerViewPostChild.setLayoutManager(linearLayoutManager);
         ExpandRecyclerViewChildAdapter expandRecyclerViewChildAdapter =
-                new ExpandRecyclerViewChildAdapter(context, redditPostList);
+                new ExpandRecyclerViewChildAdapter(redditPostList, timeTitleList);
         recyclerViewPostChild.setAdapter(expandRecyclerViewChildAdapter);
     }
 

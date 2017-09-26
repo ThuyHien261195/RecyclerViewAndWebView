@@ -41,12 +41,11 @@ public class ExpandNewRVPostAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             case GROUP_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_card_view_group, parent, false);
-                return new ExpandNewGroupRVHolder(
-                        (ExpandNewGroupRVHolder.OnGroupHeaderListener) this, rowView);
+                return new ExpandNewGroupRVHolder(this, rowView);
             case CHILD_CONTENT_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_card_view_post, parent, false);
-                return new PostViewHolder(rowView);
+                return new PostViewHolder(rowView, timeTitleList);
             case FOOTER_VIEW:
                 rowView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_footer, parent, false);
@@ -60,7 +59,7 @@ public class ExpandNewRVPostAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        int viewType = getItemViewType(position);
+        int viewType = holder.getItemViewType();
         RedditPostIndex redditPostIndex = getRealPositionInList(position);
 
         if (redditPostIndex == null) {
@@ -77,7 +76,7 @@ public class ExpandNewRVPostAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ExpandRedditPost expandRedditPost = expandRedditPostList.get(redditPostIndex.getGroupIndex());
                 RedditPost redditPost = expandRedditPost.getChildRedditPostList()
                         .get(redditPostIndex.getChildIndex());
-                ((PostViewHolder) holder).bindContentPostView(redditPost, timeTitleList);
+                ((PostViewHolder) holder).bindContentPostView(redditPost);
                 break;
             case FOOTER_VIEW:
                 break;

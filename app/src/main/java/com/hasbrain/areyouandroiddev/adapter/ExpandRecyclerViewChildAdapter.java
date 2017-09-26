@@ -23,22 +23,23 @@ public class ExpandRecyclerViewChildAdapter extends RecyclerView.Adapter<PostVie
     private List<RedditPost> redditPostList;
     private HashMap<String, String> timeTitleList;
 
-    public ExpandRecyclerViewChildAdapter(Context context, List<RedditPost> redditPostList) {
+    public ExpandRecyclerViewChildAdapter(List<RedditPost> redditPostList,
+                                          HashMap<String, String> timeTitleList) {
         this.redditPostList = redditPostList;
-        this.timeTitleList = FormatStringUtil.createTimeTitleList(context);
+        this.timeTitleList = timeTitleList;
     }
 
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_card_view_post, parent, false);
-        return new PostViewHolder(rowView);
+        return new PostViewHolder(rowView, timeTitleList);
     }
 
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         RedditPost redditPost = redditPostList.get(position);
-        holder.bindContentPostView(redditPost, timeTitleList);
+        holder.bindContentPostView(redditPost);
     }
 
     @Override
